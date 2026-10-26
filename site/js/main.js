@@ -251,6 +251,11 @@ async function initScrabble() {
       pyodide.FS.writeFile("/oracle/" + f, text);
     }));
     pyodide.runPython(`import sys; sys.path.insert(0, "/oracle")\nfrom kitaita_oracle import analyse, get_oracle\nget_oracle()`);
+    // words players accepted by vote in the multiplayer game (unverified unless verified); best effort
+    makeClient({ delays: [] }).playerWords().then((r) => {
+      pyodide.globals.set("_pw", JSON.stringify(r.words));
+      pyodide.runPython("import json; get_oracle().set_player_words(json.loads(_pw))");
+    }).catch(() => {});
     const secs = ((performance.now() - t0) / 1000).toFixed(1);
     status.textContent = `Word checker ready (loaded in ${secs} s).`;
     globalThis.__oracleLoadSeconds = Number(secs);
