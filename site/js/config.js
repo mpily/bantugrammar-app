@@ -22,6 +22,8 @@ export const ORACLE_DATA_FILES = [
   "data/kitaita_nouns.yaml",
   "data/kitaita_phonology.yaml",
   "data/kitaita_roots.yaml",
+  "data/kitaita_roots_induced.yaml",
+  "data/kitaita_roots_reported.yaml",
   "data/kitaita_verb_slots.yaml",
   "data/swahili_phonology.yaml",
   "data/swahili_roots.yaml",

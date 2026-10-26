@@ -108,3 +108,24 @@ def test_apostrophes_and_case():
 def test_closed_class_words(word, word_type):
     r = analyse(word)
     assert r["valid"] and any(p["word_type"] == word_type for p in r["parses"])
+
+
+@pytest.mark.parametrize("word,first_segments", [
+    ("legha", ["legh", "a"]),                   # bare form (reported by the project owner)
+    ("kulegha", ["ku", "legh", "a"]),           # infinitive ranked first
+    ("ukalegha", ["u", "ka", "legh", "a"]),
+    ("wawemanya", ["wa", "we", "many", "a"]),   # speaker sentence reading ranked first
+])
+def test_corpus_grammar_and_ranking(word, first_segments):
+    r = analyse(word)
+    assert r["valid"]
+    first = r["parses"][0]
+    assert segs(first) == first_segments
+    assert first["uses_unverified_rules"]       # corpus-derived pieces are always flagged
+
+
+def test_reported_and_induced_roots_are_labelled():
+    p = analyse("gala")["parses"][0]
+    assert p["slots"][0]["source"] == "reported" and p["uses_unverified_rules"]
+    p = analyse("legha")["parses"][0]
+    assert p["slots"][0]["source"] == "induced"
