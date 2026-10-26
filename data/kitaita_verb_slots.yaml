@@ -15,8 +15,8 @@ template:
 notes:
 - 'Paradigms ARE the co-occurrence constraints: a slot combination is licensed only if one paradigm lists
   it. Any licensed prefix chain attaches to ANY root in kitaita_roots.yaml.'
-- 'REL and EXT have no Kitaita data yet: their inventories are empty, so relative and extended verb forms
-  come back invalid rather than guessed.'
+- 'REL has no Kitaita data yet (empty inventory). EXT (extensions) and the extra endings marked ''corpus
+  pattern'' were read off the Bible corpus after speaker-verified roots: unverified.'
 - Object markers are corpus-inferred hypotheses (1sg ni, 1pl di, cl2/2pl wi); class OMs have no data yet.
 morphemes:
   NEG:
@@ -242,7 +242,15 @@ morphemes:
     source: verified infinitives, e.g. kumerea/kughesha (research VERIFIED_NOUN_TRANSLATIONS)
     swahili:
       infinitive: true
-  NEG2: []
+  NEG2:
+  - id: neg2.se
+    form: se
+    gloss: NEG.SUBJ
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 80 word types
+      with class subjects (jisebonyeke, ghisewonagha); speaker-verified only for persons/animates (research
+      NEGATIVE_*_PREFIX tables)'
   TAM:
   - id: tam.pres.we
     form: we
@@ -302,6 +310,16 @@ morphemes:
     source: native-speaker correction 2026-10-07 (research page3_verb_rules.json notes)
     swahili:
       tense: future
+  - id: tam.fut.chaa
+    form: chaa
+    gloss: FUT (chaa)
+    tense: future
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; e.g. wichaabonya,
+      nichaambonya'
+    swahili:
+      tense: future
   - id: tam.cond.ki
     form: ki
     gloss: COND
@@ -353,7 +371,157 @@ morphemes:
       n=10
     swahili:
       class: '2'
-  EXT: []
+  - id: om.corpus.m
+    form: m
+    gloss: OM.3sg/cl.u
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 277 word types,
+      e.g. ukamneka'
+    swahili:
+      class: '1'
+  - id: om.corpus.i
+    form: i
+    gloss: OM.cl.i
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 149 word types,
+      e.g. kwaipata'
+    swahili:
+      class: '9'
+  - id: om.corpus.ku
+    form: ku
+    gloss: OM.2sg
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 109 word types,
+      e.g. nichakubonya'
+    swahili:
+      person: 2sg
+  - id: om.corpus.ri
+    form: ri
+    gloss: OM.cl.ri
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 71 word types,
+      e.g. ukarineka'
+    swahili:
+      class: '1'
+  - id: om.corpus.ghi
+    form: ghi
+    gloss: OM.cl.ghi
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 68 word types,
+      e.g. kughighore'
+    swahili:
+      class: '6'
+  - id: om.corpus.ji
+    form: ji
+    gloss: OM.cl.ji
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 62 word types,
+      e.g. kujibonya'
+    swahili:
+      class: '5'
+  - id: om.corpus.chi
+    form: chi
+    gloss: OM.cl.chi
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 45 word types,
+      e.g. ukachiinja'
+    swahili:
+      class: '7'
+  - id: om.corpus.ghu
+    form: ghu
+    gloss: OM.cl.ghu
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 34 word types,
+      e.g. wikaghuboisa'
+    swahili:
+      class: '3'
+  EXT:
+  - id: ext.w
+    form: w
+    gloss: PASS
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 230 word types'
+  - id: ext.lw
+    form: lw
+    gloss: PASS (after vowel)
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 60 word types'
+  - id: ext.ek
+    form: ek
+    gloss: STAT
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 56 word types'
+  - id: ext.ik
+    form: ik
+    gloss: STAT
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 30 word types'
+  - id: ext.i
+    form: i
+    gloss: APPL
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 159 word types'
+  - id: ext.ir
+    form: ir
+    gloss: APPL
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 32 word types'
+  - id: ext.er
+    form: er
+    gloss: APPL
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 41 word types'
+  - id: ext.yer
+    form: yer
+    gloss: APPL (after won-)
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 38 word types'
+  - id: ext.el
+    form: el
+    gloss: APPL
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 36 word types'
+  - id: ext.il
+    form: il
+    gloss: APPL
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 26 word types'
+  - id: ext.ish
+    form: ish
+    gloss: CAUS
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 27 word types'
+  - id: ext.is
+    form: is
+    gloss: CAUS
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 24 word types'
+  - id: ext.an
+    form: an
+    gloss: RECP
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 26 word types'
   FV:
   - id: fv.a
     form: a
@@ -375,6 +543,55 @@ morphemes:
     gloss: FV.NEG.PAST
     unverified: false
     source: research negation tables (Kitaita Word Bank, 2026-10-15/21, n=1 per cell)
+  - id: fv.corpus.agha
+    form: agha
+    gloss: HAB/IPFV
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 255 word types'
+  - id: fv.corpus.ie
+    form: ie
+    gloss: PFV/SUBJ?
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 192 word types'
+  - id: fv.corpus.ieghe
+    form: ieghe
+    gloss: PAST.PFV
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 113 word types'
+  - id: fv.corpus.eghe
+    form: eghe
+    gloss: PAST.PFV
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 50 word types'
+  - id: fv.corpus.o
+    form: o
+    gloss: FV -o (function unknown)
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 79 word types'
+  - id: fv.corpus.e
+    form: e
+    gloss: FV -e (subjunctive/past?)
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 353 word types'
+  - id: fv.corpus.oghe
+    form: oghe
+    gloss: PAST.PFV (-oghe)
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 68 word types'
+  - id: fv.corpus.enyi
+    form: enyi
+    gloss: IMP.PL?
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 12 word types
+      (sikirenyi)'
   PORTMANTEAU:
   - id: negp.1sg.present
     form: si
@@ -899,6 +1116,13 @@ paradigms:
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.past
   tags:
   - affirmative
@@ -922,6 +1146,13 @@ paradigms:
   fv:
   - fv.a
   - fv.e.past
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.perfect
   tags:
   - affirmative
@@ -940,6 +1171,13 @@ paradigms:
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.future
   tags:
   - affirmative
@@ -957,11 +1195,19 @@ paradigms:
   - slot: TAM
     choose:
     - tam.fut.cha
+    - tam.fut.chaa
   - slot: OM
     choose: all
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.conditional
   tags:
   - affirmative
@@ -982,6 +1228,83 @@ paradigms:
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
+- id: aff.perfect.person
+  tags:
+  - affirmative
+  - perfect
+  unverified: true
+  note: 'corpus pattern: person markers na-/kwa- before -da- (nadakatisha, kwadamkira)'
+  sequence:
+  - slot: SM
+    choose:
+    - sm.1sg.present
+    - sm.2sg.present
+  - slot: TAM
+    choose:
+    - tam.perf.da
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
+- id: neg.subjunctive.class
+  tags:
+  - negative
+  - subjunctive_imperative
+  unverified: true
+  note: 'corpus pattern: class SM + -se- + root (jisebonyeke)'
+  sequence:
+  - slot: SM
+    choose:
+    - kind:
+      - class
+  - slot: NEG2
+    choose:
+    - neg2.se
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.e.neg
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
+- id: imperative
+  tags:
+  - affirmative
+  - imperative
+  unverified: true
+  note: 'bare root + -a (imperative / citation form), e.g. ''legha''. Reported by the project owner 2026-10-26;
+    not yet in the research tables. Note: bare ''legha'' itself does not occur in the Bible corpus.'
+  sequence: []
+  fv:
+  - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
+  - fv.corpus.enyi
 - id: infinitive
   tags:
   - infinitive
@@ -995,6 +1318,13 @@ paradigms:
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.present
   tags:
   - negative
@@ -1029,6 +1359,13 @@ paradigms:
     optional: true
   fv:
   - fv.e.neg
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.future
   tags:
   - negative
@@ -1058,11 +1395,19 @@ paradigms:
   - slot: TAM
     choose:
     - tam.fut.cha
+    - tam.fut.chaa
   - slot: OM
     choose: all
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.past
   tags:
   - negative
@@ -1082,6 +1427,13 @@ paradigms:
     optional: true
   fv:
   - fv.eghe.negpast
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.past.va
   tags:
   - negative
@@ -1099,6 +1451,13 @@ paradigms:
     optional: true
   fv:
   - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.person
   tags:
   - negative
@@ -1115,3 +1474,10 @@ paradigms:
     optional: true
   fv:
   - fv.e.neg
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe

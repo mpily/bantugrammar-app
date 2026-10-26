@@ -805,3 +805,11 @@ paradigms:
     optional: true
   fv:
   - fv.a
+- id: imperative
+  tags:
+  - affirmative
+  - imperative
+  sequence: []
+  fv:
+  - fv.a
+  note: 'imperative singular: bare stem + -a (penda)'

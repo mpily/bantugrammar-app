@@ -45,6 +45,9 @@ SRC_CORPUS = "research corpus alignment (page1_vocabulary.json, Bible parallel t
 SRC_TAM_2026_10_07 = "native-speaker correction 2026-10-07 (research page3_verb_rules.json notes)"
 SRC_PERSON_SM = "research PERSON_SUBJECT_MARKERS_BY_TAM"
 SRC_NEG = "research negation tables (Kitaita Word Bank, 2026-10-15/21, n=1 per cell)"
+SRC_CORPUS_AFFIX = ("corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus "
+                    "(scripts/affix_evidence in status.md 2026-10-26); function guessed from Bantu typology, "
+                    "NOT speaker-checked")
 SRC_OM = "research KITAITA_PERSON_OBJECT_MARKER_HYPOTHESIS (corpus-inferred, NOT speaker-verified)"
 
 NUMBER_BY_CLASS = {  # from nearest Swahili class in research kitaita_demonstrative_concord.json
@@ -240,13 +243,16 @@ def build_nouns(v, tables, classes, dem):
         e = entries.get(form)
         if e is None:
             e = entries[form] = {"form": form, "class": None, "number": "unknown", "swahili": [],
-                                 "unverified": True, "class_unverified": True, "sources": []}
+                                 "swahili_unverified": [], "unverified": True, "class_unverified": True,
+                                 "sources": []}
         if cls and (e["class"] is None or (e["class_unverified"] and not unverified)):
             e["class"], e["class_unverified"] = cls, unverified
             e["number"] = classes.get(cls, {}).get("number", "unknown")
+        # speaker-given glosses and alignment guesses are kept apart: only `swahili` is shown
+        key = "swahili_unverified" if unverified else "swahili"
         for s in sorted(swahili):
-            if s not in e["swahili"]:
-                e["swahili"].append(s)
+            if s not in e[key]:
+                e[key].append(s)
         e["unverified"] = e["unverified"] and unverified
         if source not in e["sources"]:
             e["sources"].append(source)
@@ -264,6 +270,8 @@ def build_nouns(v, tables, classes, dem):
         kit = cand.get("kitaita_word") or ""
         cls = (noun_class_of.get(kit) or {}).get("subject_marker")
         put(kit, cls, {lemma}, True, SRC_CORPUS)
+    for e in entries.values():
+        e["swahili_unverified"] = [x for x in e["swahili_unverified"] if x not in e["swahili"]]
     return sorted(entries.values(), key=lambda e: e["form"])
 
 
@@ -340,6 +348,8 @@ def build_verb_slots(v, classes):
          "source": SRC_TAM_2026_10_07},
         {"id": "tam.fut.cha", "form": "cha", "gloss": "FUT", "tense": "future", "unverified": False,
          "source": SRC_TAM_2026_10_07},
+        {"id": "tam.fut.chaa", "form": "chaa", "gloss": "FUT (chaa)", "tense": "future", "unverified": True,
+         "source": f"{SRC_CORPUS_AFFIX}; e.g. wichaabonya, nichaambonya"},
         {"id": "tam.cond.ki", "form": "ki", "gloss": "COND", "tense": "conditional", "unverified": False,
          "source": SRC_TAM_2026_10_07},
         {"id": "tam.cond.ka", "form": "ka", "gloss": "COND/CONS", "tense": "conditional", "unverified": False,
@@ -356,6 +366,17 @@ def build_verb_slots(v, classes):
                    "source": f"{SRC_OM}; n={h['n']}",
                    "swahili": {"person": key} if key in ("1sg", "1pl") else {"class": "2"}})
 
+    # corpus-attested object markers between a licensed prefix and a verified root (2026-10-26)
+    for form, key, sw, n, example in (("m", "3sg/cl.u", {"class": "1"}, 277, "ukamneka"),
+                                      ("i", "cl.i", {"class": "9"}, 149, "kwaipata"),
+                                      ("ku", "2sg", {"person": "2sg"}, 109, "nichakubonya"),
+                                      ("ri", "cl.ri", {"class": "1"}, 71, "ukarineka"),
+                                      ("ghi", "cl.ghi", {"class": "6"}, 68, "kughighore"),
+                                      ("ji", "cl.ji", {"class": "5"}, 62, "kujibonya"),
+                                      ("chi", "cl.chi", {"class": "7"}, 45, "ukachiinja"),
+                                      ("ghu", "cl.ghu", {"class": "3"}, 34, "wikaghuboisa")):
+        om.append({"id": f"om.corpus.{form}", "form": form, "gloss": f"OM.{key}", "unverified": True,
+                   "source": f"{SRC_CORPUS_AFFIX}; {n} word types, e.g. {example}", "swahili": sw})
     fv = [
         {"id": "fv.a", "form": "a", "gloss": "FV", "unverified": False, "source": "verified sentences"},
         {"id": "fv.e.neg", "form": v.NEGATIVE_FINAL_VOWEL, "gloss": "FV.NEG", "unverified": False, "source": SRC_NEG},
@@ -364,6 +385,26 @@ def build_verb_slots(v, classes):
         {"id": "fv.eghe.negpast", "form": v.NEGATIVE_CLASS_PAST_SUFFIX, "gloss": "FV.NEG.PAST", "unverified": False,
          "source": SRC_NEG},
     ]
+    # corpus-attested extensions and endings (word-type counts after the 42 verified roots, 2026-10-26)
+    ext = []
+    for form, gloss, n in (("w", "PASS", 230), ("lw", "PASS (after vowel)", 60), ("ek", "STAT", 56),
+                           ("ik", "STAT", 30), ("i", "APPL", 159), ("ir", "APPL", 32), ("er", "APPL", 41),
+                           ("yer", "APPL (after won-)", 38), ("el", "APPL", 36), ("il", "APPL", 26),
+                           ("ish", "CAUS", 27), ("is", "CAUS", 24), ("an", "RECP", 26)):
+        ext.append({"id": f"ext.{form}", "form": form, "gloss": gloss, "unverified": True,
+                    "source": f"{SRC_CORPUS_AFFIX}; {n} word types"})
+    corpus_fv = []
+    for form, gloss, n in (("agha", "HAB/IPFV", 255), ("ie", "PFV/SUBJ?", 192), ("ieghe", "PAST.PFV", 113),
+                           ("eghe", "PAST.PFV", 50), ("o", "FV -o (function unknown)", 79),
+                           ("e", "FV -e (subjunctive/past?)", 353), ("oghe", "PAST.PFV (-oghe)", 68)):
+        corpus_fv.append({"id": f"fv.corpus.{form}", "form": form, "gloss": gloss, "unverified": True,
+                          "source": f"{SRC_CORPUS_AFFIX}; {n} word types"})
+    fv += corpus_fv
+    fv.append({"id": "fv.corpus.enyi", "form": "enyi", "gloss": "IMP.PL?", "unverified": True,
+               "source": f"{SRC_CORPUS_AFFIX}; 12 word types (sikirenyi)"})
+    neg2 = [{"id": "neg2.se", "form": "se", "gloss": "NEG.SUBJ", "unverified": True,
+             "source": f"{SRC_CORPUS_AFFIX}; 80 word types with class subjects (jisebonyeke, ghisewonagha); "
+                       "speaker-verified only for persons/animates (research NEGATIVE_*_PREFIX tables)"}]
     neg = [{"id": "neg.nde", "form": v.NEGATIVE_MARKER_KITAITA, "gloss": "NEG", "unverified": False, "source": SRC_NEG}]
 
     portmanteau = []
@@ -412,13 +453,31 @@ def build_verb_slots(v, classes):
          "fv": ["fv.a"]},
         {"id": "aff.future", "tags": ["affirmative", "future"], "unverified": False,
          "sequence": [{"slot": "SM", "choose": [{"kind": ["class"]}, *["sm.1sg.future", "sm.2sg.future", "sm.1pl.future", "sm.2pl.future"]]},
-                      {"slot": "TAM", "choose": ["tam.fut.cha"]},
+                      {"slot": "TAM", "choose": ["tam.fut.cha", "tam.fut.chaa"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.a"]},
         {"id": "aff.conditional", "tags": ["affirmative", "conditional"], "unverified": False,
          "sequence": [{"slot": "SM", "choose": [{"kind": ["class"]}, *["sm.2sg.conditional"]]},
                       {"slot": "TAM", "choose": ["tam.cond.ki", "tam.cond.ka"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
+         "fv": ["fv.a"]},
+        {"id": "aff.perfect.person", "tags": ["affirmative", "perfect"], "unverified": True,
+         "note": "corpus pattern: person markers na-/kwa- before -da- (nadakatisha, kwadamkira)",
+         "sequence": [{"slot": "SM", "choose": ["sm.1sg.present", "sm.2sg.present"]},
+                      {"slot": "TAM", "choose": ["tam.perf.da"]},
+                      {"slot": "OM", "choose": "all", "optional": True}],
+         "fv": ["fv.a"]},
+        {"id": "neg.subjunctive.class", "tags": ["negative", "subjunctive_imperative"], "unverified": True,
+         "note": "corpus pattern: class SM + -se- + root (jisebonyeke)",
+         "sequence": [{"slot": "SM", "choose": [{"kind": ["class"]}]},
+                      {"slot": "NEG2", "choose": ["neg2.se"]},
+                      {"slot": "OM", "choose": "all", "optional": True}],
+         "fv": ["fv.e.neg"]},
+        {"id": "imperative", "tags": ["affirmative", "imperative"], "unverified": True,
+         "note": "bare root + -a (imperative / citation form), e.g. 'legha'. Reported by the project owner "
+                 "2026-10-26; not yet in the research tables. Note: bare 'legha' itself does not occur in the "
+                 "Bible corpus.",
+         "sequence": [],
          "fv": ["fv.a"]},
         {"id": "infinitive", "tags": ["infinitive"], "unverified": False,
          "sequence": [{"slot": "SM", "choose": ["inf.ku"]},
@@ -435,7 +494,7 @@ def build_verb_slots(v, classes):
          "note": "nde + SM + cha + root + -a (future keeps -a)",
          "sequence": [{"slot": "NEG", "choose": ["neg.nde"]},
                       {"slot": "SM", "choose": [{"class": [c for c in class_ids if c != "va"], "kind": ["class"]}, *["sm.va.neg"]]},
-                      {"slot": "TAM", "choose": ["tam.fut.cha"]},
+                      {"slot": "TAM", "choose": ["tam.fut.cha", "tam.fut.chaa"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.a"]},
         {"id": "neg.class.past", "tags": ["negative", "past"], "unverified": False,
@@ -455,18 +514,22 @@ def build_verb_slots(v, classes):
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.e.neg"]},
     ]
+    for p in paradigms:  # corpus endings are allowed after any licensed prefix chain (unverified)
+        p["fv"] = p["fv"] + [f["id"] for f in corpus_fv if f["id"] not in p["fv"]]
+        if p["id"] == "imperative":
+            p["fv"].append("fv.corpus.enyi")
     return {
         "language": "dav",
         "template": ["NEG", "SM", "NEG2", "TAM", "REL", "OM", "ROOT", "EXT", "FV"],
         "notes": [
             "Paradigms ARE the co-occurrence constraints: a slot combination is licensed only if one "
             "paradigm lists it. Any licensed prefix chain attaches to ANY root in kitaita_roots.yaml.",
-            "REL and EXT have no Kitaita data yet: their inventories are empty, so relative and extended "
-            "verb forms come back invalid rather than guessed.",
+            "REL has no Kitaita data yet (empty inventory). EXT (extensions) and the extra endings marked "
+            "'corpus pattern' were read off the Bible corpus after speaker-verified roots: unverified.",
             "Object markers are corpus-inferred hypotheses (1sg ni, 1pl di, cl2/2pl wi); class OMs "
             "have no data yet.",
         ],
-        "morphemes": {"NEG": neg, "SM": sm, "NEG2": [], "TAM": tam, "REL": [], "OM": om, "EXT": [], "FV": fv,
+        "morphemes": {"NEG": neg, "SM": sm, "NEG2": neg2, "TAM": tam, "REL": [], "OM": om, "EXT": ext, "FV": fv,
                       "PORTMANTEAU": portmanteau},
         "paradigms": paradigms,
     }
@@ -484,6 +547,10 @@ def build_phonology(v):
              "when": {"tags": ["affirmative", "present"], "kind": ["class"]},
              "table": dict(v.PRESENT_SM_VOWEL_CONFIRMED), "optional": True, "unverified": False,
              "source": "research PRESENT_SM_VOWEL_CONFIRMED (u->wa, ri->ra, ...); unfused forms also verified"},
+            {"id": "perfect_sm_fusion", "order": 1, "type": "replace_form", "target": "SM",
+             "when": {"tags": ["affirmative", "perfect"], "kind": ["class"]},
+             "table": dict(v.PRESENT_SM_VOWEL_CONFIRMED), "optional": True, "unverified": True,
+             "source": "corpus pattern: the present-tense fused markers also occur before -da- (wadawona, ghwada-)"},
             {"id": "past_sm_vowel_lowering", "order": 2, "type": "replace_final", "target": "SM",
              "when": {"tags": ["affirmative", "past"], "kind": ["class", "person"]},
              "table": {"i": "e", "u": "o"}, "optional": True, "unverified": True,

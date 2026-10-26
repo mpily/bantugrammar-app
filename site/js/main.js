@@ -251,6 +251,11 @@ async function initScrabble() {
       pyodide.FS.writeFile("/oracle/" + f, text);
     }));
     pyodide.runPython(`import sys; sys.path.insert(0, "/oracle")\nfrom kitaita_oracle import analyse, get_oracle\nget_oracle()`);
+    // words players accepted by vote in the multiplayer game (unverified unless verified); best effort
+    makeClient({ delays: [] }).playerWords().then((r) => {
+      pyodide.globals.set("_pw", JSON.stringify(r.words));
+      pyodide.runPython("import json; get_oracle().set_player_words(json.loads(_pw))");
+    }).catch(() => {});
     const secs = ((performance.now() - t0) / 1000).toFixed(1);
     status.textContent = `Word checker ready (loaded in ${secs} s).`;
     globalThis.__oracleLoadSeconds = Number(secs);
@@ -303,7 +308,7 @@ $("#sc-form").addEventListener("submit", (e) => {
   const s = scoreWord(word, result, tiles, { start: Number($("#sc-start").value), blanks: use.blanks });
   $("#sc-result").dataset.word = word;
   const parses = result.parses.map((p) => `<li><b>${esc(p.word_type)}</b>: ${p.slots.map((sl) =>
-      `<span class="seg${sl.unverified ? " unv" : ""}" title="${esc(sl.slot)}${sl.gloss ? ": " + esc(sl.gloss) : ""}${sl.underlying ? " (from " + esc(sl.underlying) + ")" : ""}">${esc(sl.form || "∅")}</span>`).join("")}
+      `<span class="seg${sl.unverified ? " unv" : ""}" title="${esc(sl.slot)}${sl.gloss ? ": " + esc(sl.gloss) : ""}${sl.underlying ? " (from " + esc(sl.underlying) + ")" : ""}${sl.source && sl.source !== "curated" ? " [root " + esc(sl.source) + " — unverified]" : ""}">${esc(sl.form || "∅")}</span>`).join("")}
       ${p.swahili_equivalent ? ` ≈ Sw. <i>${esc(p.swahili_equivalent)}</i>` : ""}
       ${p.uses_unverified_rules ? ` <span class="badge badge-machine" title="${esc((p.unverified_items || []).join(", "))}">relies on unverified data</span>` : ` <span class="badge badge-verified">verified data</span>`}</li>`).join("");
   $("#sc-result").innerHTML = s.valid

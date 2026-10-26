@@ -48,7 +48,7 @@ def test_nouns_and_adjectives(word, word_type):
 
 @pytest.mark.parametrize("word,reason,what", [
     ("wewamanya", "illegal_affix_sequence", "TAM before SM"),
-    ("uwechiwona", "illegal_affix_sequence", "OM 'chi' is not in the object-marker inventory"),
+    ("uwelawona", "illegal_affix_sequence", "OM 'la' is not in the object-marker inventory"),
     ("ndezamie", "illegal_affix_sequence", "negative 'nde' is not an adjectival prefix"),
     ("kizamie", "illegal_affix_sequence", "series-A prefix ki- on series-B stem -zamie"),
     ("wawekpakpa", "unknown_root", "licensed prefix wa-we- + unknown root"),
@@ -70,7 +70,7 @@ def test_swahili_parallel_parser():
 
 
 @pytest.mark.parametrize("word,swahili", [
-    ("kwawemanya", "unajua"), ("nerekoghe", "nilikuwa"), ("ndeukunde", "hapendi"),
+    ("rawewona", "anaona"), ("nerekoghe", "nilikuwa"), ("ndeukunde", "hapendi"),
 ])
 def test_swahili_equivalent(word, swahili):
     eqs = {e for p in verb_parses(word) for e in p["swahili_equivalents"]}
@@ -108,3 +108,47 @@ def test_apostrophes_and_case():
 def test_closed_class_words(word, word_type):
     r = analyse(word)
     assert r["valid"] and any(p["word_type"] == word_type for p in r["parses"])
+
+
+@pytest.mark.parametrize("word,first_segments", [
+    ("legha", ["legh", "a"]),                   # bare form (reported by the project owner)
+    ("kulegha", ["ku", "legh", "a"]),           # infinitive ranked first
+    ("ukalegha", ["u", "ka", "legh", "a"]),
+    ("wawemanya", ["wa", "we", "many", "a"]),   # speaker sentence reading ranked first
+])
+def test_corpus_grammar_and_ranking(word, first_segments):
+    r = analyse(word)
+    assert r["valid"]
+    first = r["parses"][0]
+    assert segs(first) == first_segments
+    assert first["uses_unverified_rules"]       # corpus-derived pieces are always flagged
+
+
+def test_reported_and_induced_roots_are_labelled():
+    p = analyse("gala")["parses"][0]
+    assert p["slots"][0]["source"] == "reported" and p["uses_unverified_rules"]
+    p = analyse("legha")["parses"][0]
+    assert p["slots"][0]["source"] == "induced"
+
+
+def test_no_swahili_meaning_for_unverified_roots_or_nouns():
+    for p in analyse("kurashana")["parses"] + analyse("wawemanya")["parses"]:
+        root = next(s for s in p["slots"] if s["slot"] == "ROOT")
+        if root.get("unverified"):
+            assert root["gloss"] is None and p["swahili_equivalent"] is None and p["swahili_equivalents"] == []
+    corpus_noun = next(p for p in analyse("mlungu")["parses"] if p["word_type"] == "noun")
+    if corpus_noun["uses_unverified_rules"] and "noun entry" in " ".join(corpus_noun["unverified_items"]):
+        assert corpus_noun["swahili_equivalent"] is None
+    verified = next(p for p in analyse("mwana")["parses"] if p["word_type"] == "noun")
+    assert verified["swahili_equivalent"] == "mtoto"
+
+
+def test_player_accepted_words():
+    from kitaita_oracle import Oracle
+    o = Oracle()
+    assert o.analyse("zzyzx")["valid"] is False
+    o.set_player_words([{"word": "Zzyzx", "status": "player_accepted", "n_rooms": 1},
+                        {"word": "qqq", "status": "verified", "n_rooms": 2}])
+    p = o.analyse("zzyzx")["parses"][0]
+    assert p["word_type"] == "player_accepted" and p["uses_unverified_rules"]
+    assert o.analyse("qqq")["parses"][0]["uses_unverified_rules"] is False

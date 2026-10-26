@@ -131,6 +131,7 @@ assert.match(await check("wawemanya"), /Valid — \d+ points/);
 await page.click("#scrabble details summary");
 await shot("scrabble_valid");
 assert.match(await check("ndeukunde"), /Valid/);
+assert.match(await check("legha"), /Valid/);
 assert.match(await check("kizamie"), /illegal_affix_sequence/);
 assert.match(await check("wawekpakpa"), /unknown_root/);
 console.log(`ok scrabble (oracle load ${secs} s${MOBILE ? ", mobile emulation: Fast-3G-like network + 4x CPU slowdown" : ""})`);

@@ -44,7 +44,9 @@ export function makeClient({ base = API_BASE, fetchImpl = globalThis.fetch, slee
   }
 
   return {
+    request,
     health: () => request("/api/health"),
+    playerWords: () => request("/api/player_words"),
     translate: (text) => request("/api/translate", { method: "POST", body: { text, src: "swh", tgt: "dav" } }),
     feedback: (payload) => request("/api/feedback", { method: "POST", body: payload }),
     progress: () => request("/api/progress"),

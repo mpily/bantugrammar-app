@@ -83,3 +83,81 @@ Progress, Drills and Scrabble tabs. CI workflow: tests, then Pages deploy.
 - Drill levels L2–L4 (noun+adjective / SV / SVO with object marker) need a
   sentence-structure tag on `/api/verified_pairs`. The API's `level` is only a
   length heuristic, so the page groups sentences together for now.
+
+## 2026-10-26 (cont.): verb detection — "gala"/"legha" were rejected; coverage 18.9% → 55.2%
+
+User report: the verbs *gala* and *legha* were refused. Causes: (1) the root
+*legh* was missing (the research alignment never extracted it, though the corpus
+has *kulegha* 50×, *ukalegha* 44×, *wikalegha* 30×); (2) bare forms (root + -a)
+had no paradigm; (3) *gala* has no inflected form anywhere in the corpus.
+
+**Method.** One change at a time, each measured on the HELD-OUT half of corpus
+word types (`split_half` in `scripts/oracle_coverage.py`; roots are induced
+from the other half only), n = 3,000 sampled types, with controls: the same
+words with letters shuffled, and (from E5) one-letter mutants that are not
+corpus words.
+
+| Step | Change (all new items `unverified: true`) | Held-out accepted | 95% CI | Shuffled control |
+|---|---|---|---|---|
+| E0 | baseline | 18.9% | 17.6–20.4 | 0.1% |
+| E1 | bare imperative/citation form (root + -a), reported by the project owner | 19.9% | 18.5–21.3 | 0.1% |
+| E3a | corpus suffixes after verified roots: passive -w-/-lw-, stative -ek-/-ik-, applicative -i-/-ir-/-er-/-el-/-il-, causative -ish-/-is-, reciprocal -an-; endings -agha, -ie, -ieghe, -eghe, -o, -e | 30.4% | 28.8–32.1 | 0.1% |
+| E4a | corpus object markers m-, i-, ku-, ri-, ghi-, ji-, chi-, ghu- | 33.7% | 32.1–35.4 | 0.1% |
+| E4b | future -chaa-; na-/kwa- and fused SMs before perfect -da-; class negative subjunctive -se-; ending -oghe | 35.9% | 34.2–37.6 | 0.1% |
+| E5 | roots induced from the corpus (`scripts/induce_roots.py`) | **55.2%** | 53.4–57.0 | 0.2% (0.1–0.4) |
+
+- E5 harder control: one-letter mutants not in the corpus are accepted 4.3%
+  (3.6–5.1%), vs 55% for real held-out words. Some mutants may be real words
+  the Bible lacks, so this is an upper bound on false accepts.
+- Running text (all 577,495 tokens, roots induced from the train half): 56.6%.
+- Speaker-verified vocabulary words: 91/91.
+- **Root induction:** a candidate root is kept only if it follows ≥3 different
+  licensed prefixes, ≥2 of them "strong" (tense marker, infinitive ku- or
+  negation). Candidates are dropped when they are affix fragments (*egh*),
+  a known root plus ≤3 letters or plus object marker/extensions (*mzer* = m + *zer*,
+  *kaiagh* = *kai* + *-agh-*), or a known root minus a leading marker with less
+  evidence (*any* vs *many*). The shipped file uses the whole corpus: 526 roots,
+  no glosses (the corpus shows a string behaves like a root, not what it means).
+- **Reported roots:** `data/kitaita_roots_reported.yaml` holds roots the project
+  owner reports but the corpus does not attest: `gal` (*gala*). Meaning not
+  recorded yet.
+- **Analysis order:** speaker-verified root first, then fewest unverified
+  assumptions, then shorter root (more morphemes recognized). Known wrong
+  order: *wikamlegha* lists the research corpus root *mlegh* before m + *legh*.
+- Oracle load in headless desktop Chromium: 4.6 s (was 2.2–3.2 s), because of
+  the larger root list and the extra paradigms.
+
+**Open questions for speakers (added):** what does *gala* mean, and how is it
+inflected? Are the suffix functions guessed above right (-agha habitual,
+-ieghe/-eghe/-oghe past perfective, -w- passive, -ir-/-er- applicative,
+-ish- causative, -an- reciprocal)? Is *-chaa-* a separate future? Do class
+subjects take negative subjunctive *-se-*?
+
+## 2026-10-26 (cont. 2): Swahili meanings hidden for unverified items; multiplayer Word Race
+
+**Swahili meanings (user request):** a root or noun gloss that comes from
+automatic alignment is no longer shown (e.g. *kurashana* was glossed
+"kuyotayarishwa", *mzuri* "mfalme"). Only speaker-given meanings appear; the
+alignment guesses stay in the data as `swahili_unverified`.
+
+**Word Race (`site/game.html`, user decisions: rooms on the HF Space, round-based
+race, "majority accepts, logged unverified"):** create a room, share the link
+(copy or WhatsApp), join with a nickname. Every player gets the same 10 tiles
+(≥4 vowels) for 60–180 s; words score their tile values (+10 for 7+ letters).
+A word the checker rejects can be put to a vote; if most votes cast say yes it
+scores and becomes a *player-accepted* word (unverified) that the oracle accepts
+for everyone, including the Scrabble tab (`/api/player_words`). It becomes
+*verified* after acceptance in 2 different rooms or by a reviewer. The room
+server and word checking run on the Space (research repo `hf_space/api/game.py`),
+so phones don't load Pyodide for the game.
+
+**Checks:** pytest 67 passed; node 37 passed; page e2e OK; new two-player e2e
+(`tests/e2e/game.e2e.mjs`, desktop + phone-sized browsers) against the real
+Space API running locally: create → share link → join → same rack → word not in
+rack rejected → tap-to-type → rejected word challenged → other player votes yes
+→ scored as player-accepted; timer counts down; invite box hidden during rounds.
+
+**Not done:** not deployed (needs the research branch merged AND the Space's
+`hf_space/` updated, then this branch merged for Pages); the game e2e is not in
+CI (it needs a running Space); a dropped connection rejoins as a new player
+(score restarts).

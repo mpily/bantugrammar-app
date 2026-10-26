@@ -62,3 +62,11 @@ def test_corpus_items_are_unverified():
     assert all(r["unverified"] for r in roots if r["source"] == "corpus")
     nouns = yaml.safe_load((ROOT / "data" / "kitaita_nouns.yaml").read_text())["nouns"]
     assert all(n["unverified"] for n in nouns if n["sources"] == ["corpus"])
+
+
+def test_induced_roots_have_evidence_and_no_glosses():
+    d = yaml.safe_load((ROOT / "data" / "kitaita_roots_induced.yaml").read_text())
+    assert d["settings"]["min_prefixes"] >= 3 and d["settings"]["min_strong"] >= 2
+    for r in d["roots"]:
+        assert r["unverified"] is True and "swahili" not in r
+        assert r["n_prefixes"] >= d["settings"]["min_prefixes"] and len(r["root"]) >= d["settings"]["min_len"]

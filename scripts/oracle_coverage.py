@@ -7,6 +7,8 @@ Reports, with n:
   * verified-sentence words (speaker text from data/): share the oracle accepts
   * corpus word types (Bible text): share accepted, split by word type and reason
   * running text: share of ALL word tokens accepted (frequency-weighted)
+  * control: one-letter substitutions of the sampled types that are not corpus words
+    (an upper bound on false accepts: some may be real words the Bible lacks)
   * control: the same corpus types with their letters shuffled. Accepted
     shuffles estimate how permissive the oracle is (over-generation).
 Only aggregate numbers are printed; no corpus text is written anywhere.
@@ -14,6 +16,7 @@ Only aggregate numbers are printed; no corpus text is written anywhere.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import sys
@@ -51,24 +54,42 @@ def summarize(words, label):
             "accepted_by_word_type": dict(kinds), "rejected_by_reason": dict(reasons)}
 
 
+def split_half(word: str) -> str:
+    """Deterministic 50/50 split of word types: 'train' (used by
+    scripts/induce_roots.py) vs 'test' (used here for held-out coverage)."""
+    return "train" if int(hashlib.md5(word.encode()).hexdigest(), 16) % 2 == 0 else "test"
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("corpus", type=Path)
     ap.add_argument("--sample", type=int, default=3000)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--half", choices=["all", "test"], default="test",
+                    help="sample corpus types from the held-out half only (default) or from all types")
     args = ap.parse_args(argv)
     rng = random.Random(args.seed)
     tokens = Counter()
     for line in args.corpus.read_text(encoding="utf-8").splitlines():
         if line.strip():
             tokens.update(WORD_RE.findall(clean_verse(json.loads(line)["text"])))
-    types = sorted(t for t in tokens if len(t) >= 3)
+    types = sorted(t for t in tokens if len(t) >= 3 and (args.half == "all" or split_half(t) == "test"))
     sample = rng.sample(types, min(args.sample, len(types)))
     shuffled = []
     for w in sample:
         letters = list(w)
         rng.shuffle(letters)
         shuffled.append("".join(letters))
+    # harder control: one-letter substitutions that are NOT themselves corpus words (may include
+    # real Kitaita words the Bible lacks, so this is an upper bound on false accepts)
+    mutants = []
+    for w in sample:
+        for _ in range(20):
+            i = rng.randrange(len(w))
+            m = w[:i] + rng.choice("abcdefghijklmnoprstuvwyz") + w[i + 1:]
+            if m != w and m not in tokens:
+                mutants.append(m)
+                break
     vocab = json.loads((ROOT / "data" / "verified_vocab.json").read_text(encoding="utf-8"))["items"]
     verified_words = sorted({w for it in vocab for w in it["kitaita"].lower().split()})
     k_tok = n_tok = 0
@@ -79,10 +100,11 @@ def main(argv=None):
     report = {
         "running_text": {"tokens": n_tok, "accepted_tokens": k_tok, "rate": round(k_tok / n_tok, 3),
                          "note": "all word tokens (any length), weighted by frequency"},
-        "corpus_types_total": len(types), "seed": args.seed,
+        "corpus_types_in_pool": len(types), "half": args.half, "seed": args.seed,
         "results": [summarize(verified_words, "verified vocabulary words (speaker)"),
                     summarize(sample, f"corpus word types, random sample"),
-                    summarize(shuffled, "control: same sample, letters shuffled")],
+                    summarize(shuffled, "control: same sample, letters shuffled"),
+                    summarize(mutants, "control: one-letter mutants not in the corpus")],
     }
     print(json.dumps(report, indent=1))
 
