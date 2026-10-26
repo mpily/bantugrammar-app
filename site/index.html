@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kitaita Learning Lab</title>
+<meta name="description" content="Swahili to Kitaita (Kidaw'ida) translation made honest by native speakers, plus learner drills and Kitaita Scrabble.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Kitaita Learning Lab</h1>
+  <p class="tagline">Machine translation for a language with almost no data, made honest by native speakers.</p>
+  <nav role="tablist">
+    <button role="tab" data-tab="translator" aria-selected="true">Translate</button>
+    <button role="tab" data-tab="progress" aria-selected="false">Progress</button>
+    <button role="tab" data-tab="drills" aria-selected="false">Drills</button>
+    <button role="tab" data-tab="scrabble" aria-selected="false">Scrabble</button>
+  </nav>
+</header>
+<div id="waking" class="waking" hidden role="status"></div>
+<main>
+  <section id="translator" role="tabpanel">
+    <form id="tr-form">
+      <label for="tr-input">Swahili sentence</label>
+      <textarea id="tr-input" rows="2" maxlength="1000" placeholder="e.g. Mbwa mkubwa aliona mwanafunzi."></textarea>
+      <button type="submit">Translate to Kitaita</button>
+    </form>
+    <div id="tr-result" aria-live="polite"></div>
+    <form id="fb-form" hidden>
+      <h2>Do you speak Kitaita? Rate and correct it</h2>
+      <fieldset class="stars"><legend>Rating</legend>
+        <label><input type="radio" name="stars" value="1">1</label>
+        <label><input type="radio" name="stars" value="2">2</label>
+        <label><input type="radio" name="stars" value="3">3</label>
+        <label><input type="radio" name="stars" value="4">4</label>
+        <label><input type="radio" name="stars" value="5">5 ★</label>
+      </fieldset>
+      <label for="fb-native">Correct Kitaita (optional)</label>
+      <textarea id="fb-native" rows="2" maxlength="1000" placeholder="How would you say it?"></textarea>
+      <details><summary>Credit me by name (optional)</summary>
+        <label for="fb-name">Name</label><input id="fb-name" maxlength="120">
+        <label class="inline"><input type="checkbox" id="fb-consent"> I agree to my name being stored with this correction</label>
+      </details>
+      <button type="submit">Send</button>
+      <p id="fb-status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section id="progress" role="tabpanel" hidden>
+    <div class="row"><h2>How the translator is doing</h2><button id="progress-refresh" class="secondary">Refresh</button></div>
+    <div id="progress-body"></div>
+  </section>
+
+  <section id="drills" role="tabpanel" hidden>
+    <h2>Practice with speaker-verified Kitaita</h2>
+    <p id="drill-source" class="muted small"></p>
+    <div class="controls">
+      <label>Items <select id="drill-level">
+        <option value="all">all</option><option value="words">L1 words</option><option value="sentences">sentences</option>
+      </select></label>
+      <label>Concord series <select id="drill-class"><option value="all">all classes</option></select></label>
+      <label>Direction <select id="drill-dir">
+        <option value="swh-dav">Swahili → Kitaita</option><option value="dav-swh">Kitaita → Swahili</option><option value="mixed">mixed</option>
+      </select></label>
+    </div>
+    <div id="drill-prompt" class="drill"></div>
+    <form id="drill-form" class="row">
+      <input id="drill-answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button type="submit">Check</button>
+      <button type="button" id="drill-next" class="secondary">Next</button>
+    </form>
+    <p id="drill-feedback" aria-live="polite"></p>
+    <p id="drill-stats" class="muted small"></p>
+    <p class="muted small">Sentence levels L2–L4 (noun+adjective, subject–verb, subject–verb–object) need a sentence-structure tag the translator API does not provide yet; sentences are grouped together for now.</p>
+  </section>
+
+  <section id="scrabble" role="tabpanel" hidden>
+    <h2>Kitaita Scrabble</h2>
+    <p class="muted small">Words are checked by the marker-oracle: nouns by dictionary, verbs and adjectives by Kitaita grammar rules, so any verb root takes any allowed prefixes. Parts that rely on unverified data are underlined.</p>
+    <p id="sc-status" class="muted" aria-live="polite"></p>
+    <div class="row"><div id="sc-rack" class="rack"></div><button id="sc-newrack" class="secondary" type="button">New rack</button></div>
+    <form id="sc-form" class="row">
+      <input id="sc-word" placeholder="Type a Kitaita word" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <label class="small">Start square <select id="sc-start"></select></label>
+      <button type="submit" disabled>Check &amp; score</button>
+    </form>
+    <div id="sc-result" aria-live="polite"></div>
+    <details><summary>Tiles and how they are scored</summary><div id="sc-tiles"></div>
+      <p class="muted small">Rarer letters score more: score = clip(round(k · ln(f<sub>max</sub>/f)), 1, 10), using how many different words contain each letter. Single-letter tiles (gh = g + h); apostrophes are ignored.</p>
+    </details>
+  </section>
+</main>
+<footer class="muted small">
+  Translations come from the research pipeline at <a href="https://github.com/mpily/BantuGrammar">mpily/BantuGrammar</a>; machine output is never presented as correct until speakers verify it.
+  Your drill progress stays in this browser only. <a href="https://github.com/mpily/bantugrammar-app">Source</a>
+</footer>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

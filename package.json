@@ -1,0 +1,9 @@
+{
+  "name": "bantugrammar-app",
+  "private": true,
+  "type": "module",
+  "description": "Static Kitaita learning/translation page; tests run with node --test (no dependencies).",
+  "scripts": {
+    "test": "node --test \"tests/js/*.test.js\""
+  }
+}
