@@ -1,5 +1,19 @@
 // Single place for deployment configuration.
-export const API_BASE = "https://mpily-bantugrammar.hf.space";
+const DEFAULT_API_BASE = "https://mpily-bantugrammar.hf.space";
+
+// Local development only: http://localhost:8000/game.html?api=http://127.0.0.1:7860
+// points the page at a local Space. Ignored on any non-localhost host.
+function apiBase() {
+  try {
+    const loc = globalThis.location;
+    if (loc && /^(localhost|127\.0\.0\.1)$/.test(loc.hostname)) {
+      const override = new URLSearchParams(loc.search).get("api");
+      if (override) return override.replace(/\/$/, "");
+    }
+  } catch { /* not in a browser */ }
+  return DEFAULT_API_BASE;
+}
+export const API_BASE = apiBase();
 export const API_VERSION = "1";
 
 // Pyodide (pinned) for the in-browser oracle; loaded only when the Scrabble tab opens.
