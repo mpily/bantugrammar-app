@@ -1,0 +1,29 @@
+# Swahili morphophonological rules (reference grammar).
+language: swh
+vowels: aeiou
+rules:
+- id: om_m_before_vowel
+  order: 1
+  type: insert_after
+  target: OM
+  when:
+    forms:
+    - m
+    right_starts: vowel
+  insert: w
+  optional: false
+  unverified: false
+  source: 'Swahili reference grammar (Ashton 1944; Mohammed 2001): m- -> mw- before a vowel-initial root
+    (anamwona)'
+- id: sm_m_before_vowel
+  order: 2
+  type: insert_after
+  target: SM
+  when:
+    forms:
+    - m
+    right_starts: vowel
+  insert: w
+  optional: false
+  unverified: false
+  source: Swahili reference grammar (Ashton 1944; Mohammed 2001)

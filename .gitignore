@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+build/
+*.egg-info/
+_site/
+node_modules/
+# never commit the Bible corpus text (copyrighted); only aggregate stats go in data/
+verses*.jsonl

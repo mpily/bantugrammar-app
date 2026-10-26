@@ -1,0 +1,256 @@
+{
+ "tile_set_version": "letters-2026-10-26+type-counts",
+ "grapheme_inventory_version": "letters-2026-10-26",
+ "corpus": "Kitaita (Kidaw'ida) Bible, verses.jsonl supplied by the project owner",
+ "corpus_sha256": "6910791880bd1bc2e60c4fee0cacc60a14dda98fb21d52c1ff163a2f6e1ed424",
+ "corpus_n_verses": 31103,
+ "n_word_types": 45016,
+ "n_word_tokens": 577495,
+ "frequency_basis": "type",
+ "n_graphemes_counted": 439149,
+ "date": "2026-10-26",
+ "formula": "score = clip(round(k * ln(f_max / f)), 1, 10)",
+ "k": 2.4934,
+ "low_n_threshold": 20,
+ "bag_size": 100,
+ "blank": {
+  "score": 0,
+  "bag": 2
+ },
+ "tiles": [
+  {
+   "grapheme": "a",
+   "count": 69971,
+   "frequency": 0.15933,
+   "score": 1,
+   "bag": 16,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "b",
+   "count": 6579,
+   "frequency": 0.01498,
+   "score": 6,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "c",
+   "count": 8025,
+   "frequency": 0.01827,
+   "score": 5,
+   "bag": 2,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "d",
+   "count": 13478,
+   "frequency": 0.03069,
+   "score": 4,
+   "bag": 3,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "e",
+   "count": 36682,
+   "frequency": 0.08353,
+   "score": 2,
+   "bag": 8,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "f",
+   "count": 2845,
+   "frequency": 0.00648,
+   "score": 8,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "g",
+   "count": 20672,
+   "frequency": 0.04707,
+   "score": 3,
+   "bag": 4,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "h",
+   "count": 30515,
+   "frequency": 0.06949,
+   "score": 2,
+   "bag": 7,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "i",
+   "count": 52839,
+   "frequency": 0.12032,
+   "score": 1,
+   "bag": 12,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "j",
+   "count": 3439,
+   "frequency": 0.00783,
+   "score": 8,
+   "bag": 2,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "k",
+   "count": 27042,
+   "frequency": 0.06158,
+   "score": 2,
+   "bag": 6,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "l",
+   "count": 9218,
+   "frequency": 0.02099,
+   "score": 5,
+   "bag": 2,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "m",
+   "count": 16482,
+   "frequency": 0.03753,
+   "score": 4,
+   "bag": 4,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "n",
+   "count": 24058,
+   "frequency": 0.05478,
+   "score": 3,
+   "bag": 5,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "o",
+   "count": 15254,
+   "frequency": 0.03474,
+   "score": 4,
+   "bag": 3,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "p",
+   "count": 1268,
+   "frequency": 0.00289,
+   "score": 10,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "q",
+   "count": 0,
+   "frequency": 0.0,
+   "score": null,
+   "bag": 0,
+   "in_bag": false,
+   "low_n": true
+  },
+  {
+   "grapheme": "r",
+   "count": 18376,
+   "frequency": 0.04184,
+   "score": 3,
+   "bag": 4,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "s",
+   "count": 13074,
+   "frequency": 0.02977,
+   "score": 4,
+   "bag": 3,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "t",
+   "count": 4546,
+   "frequency": 0.01035,
+   "score": 7,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "u",
+   "count": 30008,
+   "frequency": 0.06833,
+   "score": 2,
+   "bag": 7,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "v",
+   "count": 2162,
+   "frequency": 0.00492,
+   "score": 9,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "w",
+   "count": 23340,
+   "frequency": 0.05315,
+   "score": 3,
+   "bag": 5,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "x",
+   "count": 0,
+   "frequency": 0.0,
+   "score": null,
+   "bag": 0,
+   "in_bag": false,
+   "low_n": true
+  },
+  {
+   "grapheme": "y",
+   "count": 7366,
+   "frequency": 0.01677,
+   "score": 6,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  },
+  {
+   "grapheme": "z",
+   "count": 1910,
+   "frequency": 0.00435,
+   "score": 9,
+   "bag": 1,
+   "in_bag": true,
+   "low_n": false
+  }
+ ]
+}
