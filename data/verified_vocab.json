@@ -1,0 +1,900 @@
+{
+ "generated": "2026-10-26",
+ "source_commit": "8acde46ded40",
+ "items": [
+  {
+   "id": "vv_noun_asubuhi",
+   "swahili": "asubuhi",
+   "kitaita": "nakesho",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_bega",
+   "swahili": "bega",
+   "kitaita": "ionge",
+   "kind": "word",
+   "noun_class": "ji",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_choo",
+   "swahili": "choo",
+   "kitaita": "choronyi",
+   "kind": "word",
+   "noun_class": "chi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_dirisha",
+   "swahili": "dirisha",
+   "kitaita": "dirisha",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_fuvu",
+   "swahili": "fuvu",
+   "kitaita": "ngoma",
+   "kind": "word",
+   "noun_class": "i_nasal",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_goti",
+   "swahili": "goti",
+   "kitaita": "kitemberu",
+   "kind": "word",
+   "noun_class": "chi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_habari",
+   "swahili": "habari",
+   "kitaita": "malagho",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_huduma",
+   "swahili": "huduma",
+   "kitaita": "wutesia",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_jambo",
+   "swahili": "jambo",
+   "kitaita": "ilagho",
+   "kind": "word",
+   "noun_class": "ji",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_jana",
+   "swahili": "jana",
+   "kitaita": "ighuo",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_jicho",
+   "swahili": "jicho",
+   "kitaita": "iriso",
+   "kind": "word",
+   "noun_class": "ji",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_jioni",
+   "swahili": "jioni",
+   "kitaita": "luma lwa kenyi",
+   "kind": "sentence",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kanisa",
+   "swahili": "kanisa",
+   "kitaita": "kanisa",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kipande",
+   "swahili": "kipande",
+   "kitaita": "kibelele",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kipimo",
+   "swahili": "kipimo",
+   "kitaita": "kipimo",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kuchelewa",
+   "swahili": "kuchelewa",
+   "kitaita": "kuchelewa",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kufikiri",
+   "swahili": "kufikiri",
+   "kitaita": "kughesha",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kumaliza",
+   "swahili": "kumaliza",
+   "kitaita": "kumerea",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kuogelea",
+   "swahili": "kuogelea",
+   "kitaita": "kuogelia",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kupika",
+   "swahili": "kupika",
+   "kitaita": "kudeka",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kupumzika",
+   "swahili": "kupumzika",
+   "kitaita": "kughoresha",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kuseka",
+   "swahili": "kuseka",
+   "kitaita": "kuseka",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kushi",
+   "swahili": "kushi",
+   "kitaita": "kushi",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kushuka",
+   "swahili": "kushuka",
+   "kitaita": "kusea",
+   "kind": "word",
+   "noun_class": "ku",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_kusikia",
+   "swahili": "kusikia",
+   "kitaita": "kusikira",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_leo",
+   "swahili": "leo",
+   "kitaita": "idime",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_lugha",
+   "swahili": "lugha",
+   "kitaita": "lumi",
+   "kind": "word",
+   "noun_class": "lu",
+   "level": 1,
+   "accepted_alternatives": [
+    "kiteto"
+   ],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_machungwa",
+   "swahili": "machungwa",
+   "kitaita": "machungwa",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mahindi",
+   "swahili": "mahindi",
+   "kitaita": "mabemba",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_maisha",
+   "swahili": "maisha",
+   "kitaita": "irangi",
+   "kind": "word",
+   "noun_class": "ji",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_majira",
+   "swahili": "majira",
+   "kitaita": "vimu",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mamlaka",
+   "swahili": "mamlaka",
+   "kitaita": "nguma",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_masanduku",
+   "swahili": "masanduku",
+   "kitaita": "masanduku",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mashamba",
+   "swahili": "mashamba",
+   "kitaita": "mbuwa",
+   "kind": "word",
+   "noun_class": "i",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_maskini",
+   "swahili": "maskini",
+   "kitaita": "mkiwa",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_maswali",
+   "swahili": "maswali",
+   "kitaita": "makoto",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_matoleo",
+   "swahili": "matoleo",
+   "kitaita": "mafunyo",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mavuno",
+   "swahili": "mavuno",
+   "kitaita": "makuwido",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mawazo",
+   "swahili": "mawazo",
+   "kitaita": "maririkanyo",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [
+    "maghesho"
+   ],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mchango",
+   "swahili": "mchango",
+   "kitaita": "mchango",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mchezo",
+   "swahili": "mchezo",
+   "kitaita": "msarigho",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mfuko",
+   "swahili": "mfuko",
+   "kitaita": "mfuko",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mioyo",
+   "swahili": "mioyo",
+   "kitaita": "ngolo",
+   "kind": "word",
+   "noun_class": "i_nasal",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_misitu",
+   "swahili": "misitu",
+   "kitaita": "misidu",
+   "kind": "word",
+   "noun_class": "i",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mitego",
+   "swahili": "mitego",
+   "kitaita": "midegho",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mkopo",
+   "swahili": "mkopo",
+   "kitaita": "mkopo",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mkristo",
+   "swahili": "mkristo",
+   "kitaita": "mkristo",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mkurugenzi",
+   "swahili": "mkurugenzi",
+   "kitaita": "waziri",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mpishi",
+   "swahili": "mpishi",
+   "kitaita": "mpishi",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_msichana",
+   "swahili": "msichana",
+   "kitaita": "mwai",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mtoto",
+   "swahili": "mtoto",
+   "kitaita": "mwana",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mvulana",
+   "swahili": "mvulana",
+   "kitaita": "mndwawomi",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mwamba",
+   "swahili": "mwamba",
+   "kitaita": "mbanga",
+   "kind": "word",
+   "noun_class": "i",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mwandishi",
+   "swahili": "mwandishi",
+   "kitaita": "mwandiki",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mwavuli",
+   "swahili": "mwavuli",
+   "kitaita": "mwavuli",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mzazi",
+   "swahili": "mzazi",
+   "kitaita": "muvi",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mzee",
+   "swahili": "mzee",
+   "kitaita": "mghosi",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_mzizi",
+   "swahili": "mzizi",
+   "kitaita": "muri",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_nyani",
+   "swahili": "nyani",
+   "kitaita": "fuwe",
+   "kind": "word",
+   "noun_class": "i_nasal",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_nyimbo",
+   "swahili": "nyimbo",
+   "kitaita": "chumbo",
+   "kind": "word",
+   "noun_class": "ri",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_paka",
+   "swahili": "paka",
+   "kitaita": "boi",
+   "kind": "word",
+   "noun_class": "i",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_papa",
+   "swahili": "papa",
+   "kitaita": "papa",
+   "kind": "word",
+   "noun_class": "u",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_pesa",
+   "swahili": "pesa",
+   "kitaita": "maghome",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_sababu",
+   "swahili": "sababu",
+   "kitaita": "wundu",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_sadaka",
+   "swahili": "sadaka",
+   "kitaita": "vizongona",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_sungura",
+   "swahili": "sungura",
+   "kitaita": "kwaru",
+   "kind": "word",
+   "noun_class": "i_nasal",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_swali",
+   "swahili": "swali",
+   "kitaita": "ikoto",
+   "kind": "word",
+   "noun_class": "ji",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_tembo",
+   "swahili": "tembo",
+   "kitaita": "chovu",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_udogo",
+   "swahili": "udogo",
+   "kitaita": "wutini",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_ukweli",
+   "swahili": "ukweli",
+   "kitaita": "loli",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_uongozi",
+   "swahili": "uongozi",
+   "kitaita": "wulongozi",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_usalama",
+   "swahili": "usalama",
+   "kitaita": "wusalama",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_ushirikiano",
+   "swahili": "ushirikiano",
+   "kitaita": "mapatano",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_ustawi",
+   "swahili": "ustawi",
+   "kitaita": "wubinana",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_utoto",
+   "swahili": "utoto",
+   "kitaita": "wanake",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_uzi",
+   "swahili": "uzi",
+   "kitaita": "uzi",
+   "kind": "word",
+   "noun_class": "ghu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_viazi",
+   "swahili": "viazi",
+   "kitaita": "makaji",
+   "kind": "word",
+   "noun_class": "ghi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_visu",
+   "swahili": "visu",
+   "kitaita": "ndagaa",
+   "kind": "word",
+   "noun_class": "ri",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_vitambaa",
+   "swahili": "vitambaa",
+   "kitaita": "vitambaa",
+   "kind": "word",
+   "noun_class": "va",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_viti",
+   "swahili": "viti",
+   "kitaita": "vifumbi",
+   "kind": "word",
+   "noun_class": "va",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_vitini",
+   "swahili": "vitini",
+   "kitaita": "vifumbinyi",
+   "kind": "word",
+   "noun_class": null,
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_vyakula",
+   "swahili": "vyakula",
+   "kitaita": "vindo",
+   "kind": "word",
+   "noun_class": "va",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_vyoo",
+   "swahili": "vyoo",
+   "kitaita": "vyoronyi",
+   "kind": "word",
+   "noun_class": "va",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_waandishi",
+   "swahili": "waandishi",
+   "kitaita": "waandishi",
+   "kind": "word",
+   "noun_class": "wi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_wakatoliki",
+   "swahili": "wakatoliki",
+   "kitaita": "wakatoliki",
+   "kind": "word",
+   "noun_class": "wi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_walimu",
+   "swahili": "walimu",
+   "kitaita": "walimu",
+   "kind": "word",
+   "noun_class": "wi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_wanaume",
+   "swahili": "wanaume",
+   "kitaita": "womi",
+   "kind": "word",
+   "noun_class": "wi",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_wimbo",
+   "swahili": "wimbo",
+   "kitaita": "lumbo",
+   "kind": "word",
+   "noun_class": "lu",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  },
+  {
+   "id": "vv_noun_yai",
+   "swahili": "yai",
+   "kitaita": "ighi",
+   "kind": "word",
+   "noun_class": "ji",
+   "level": 1,
+   "accepted_alternatives": [],
+   "source": "research VERIFIED_NOUN_TRANSLATIONS (native-speaker answers)"
+  }
+ ]
+}

@@ -1,0 +1,807 @@
+# Swahili verb slot inventories and paradigms (hand-written from reference grammar).
+language: swh
+source: Swahili reference grammar (Ashton 1944; Mohammed 2001)
+template:
+- NEG
+- SM
+- NEG2
+- TAM
+- REL
+- OM
+- ROOT
+- EXT
+- FV
+notes:
+- Standard Swahili reference grammar; the parallel parser for Kitaita's swahili_equivalent and for parsing
+  Swahili words like 'ninaipenda'.
+- 'Not covered: habitual hu-, monosyllabic-root ku- retention (anakula), applicative/causative/passive
+  extensions (EXT is empty), general relative -o-.'
+morphemes:
+  NEG: []
+  SM:
+  - id: sm.1
+    form: a
+    gloss: SM.cl1
+    features:
+      class: '1'
+  - id: sm.2
+    form: wa
+    gloss: SM.cl2
+    features:
+      class: '2'
+  - id: sm.3
+    form: u
+    gloss: SM.cl3
+    features:
+      class: '3'
+  - id: sm.4
+    form: i
+    gloss: SM.cl4
+    features:
+      class: '4'
+  - id: sm.5
+    form: li
+    gloss: SM.cl5
+    features:
+      class: '5'
+  - id: sm.6
+    form: ya
+    gloss: SM.cl6
+    features:
+      class: '6'
+  - id: sm.7
+    form: ki
+    gloss: SM.cl7
+    features:
+      class: '7'
+  - id: sm.8
+    form: vi
+    gloss: SM.cl8
+    features:
+      class: '8'
+  - id: sm.9
+    form: i
+    gloss: SM.cl9
+    features:
+      class: '9'
+  - id: sm.10
+    form: zi
+    gloss: SM.cl10
+    features:
+      class: '10'
+  - id: sm.11
+    form: u
+    gloss: SM.cl11
+    features:
+      class: '11'
+  - id: sm.15
+    form: ku
+    gloss: SM.cl15
+    features:
+      class: '15'
+  - id: sm.16
+    form: pa
+    gloss: SM.cl16
+    features:
+      class: '16'
+  - id: sm.17
+    form: ku
+    gloss: SM.cl17
+    features:
+      class: '17'
+  - id: sm.18
+    form: mu
+    gloss: SM.cl18
+    features:
+      class: '18'
+  - id: sm.1sg
+    form: ni
+    gloss: SM.1sg
+    features:
+      person: 1sg
+  - id: sm.2sg
+    form: u
+    gloss: SM.2sg
+    features:
+      person: 2sg
+  - id: sm.1pl
+    form: tu
+    gloss: SM.1pl
+    features:
+      person: 1pl
+  - id: sm.2pl
+    form: m
+    gloss: SM.2pl
+    features:
+      person: 2pl
+  - id: inf.ku
+    form: ku
+    gloss: INF
+    features:
+      infinitive: true
+  NEG2:
+  - id: neg2.si
+    form: si
+    gloss: NEG2
+    features:
+      negative: true
+  TAM:
+  - id: tam.na
+    form: na
+    gloss: PRES
+    features:
+      tense: present
+  - id: tam.li
+    form: li
+    gloss: PAST
+    features:
+      tense: past
+  - id: tam.ta
+    form: ta
+    gloss: FUT
+    features:
+      tense: future
+  - id: tam.taka
+    form: taka
+    gloss: FUT (before REL)
+    features:
+      tense: future
+  - id: tam.me
+    form: me
+    gloss: PERF
+    features:
+      tense: perfect
+  - id: tam.ki
+    form: ki
+    gloss: COND
+    features:
+      tense: conditional
+  - id: tam.ka
+    form: ka
+    gloss: CONS
+    features:
+      tense: consecutive
+  - id: tam.a
+    form: a
+    gloss: GNOMIC PRES
+    features:
+      tense: gnomic
+  - id: tam.neg.ku
+    form: ku
+    gloss: NEG.PAST
+    features:
+      tense: past
+  - id: tam.neg.ja
+    form: ja
+    gloss: NEG.PERF
+    features:
+      tense: perfect
+  - id: tam.neg.ta
+    form: ta
+    gloss: NEG.FUT
+    features:
+      tense: future
+  REL:
+  - id: rel.1
+    form: ye
+    gloss: REL.cl1
+    features:
+      class: '1'
+  - id: rel.2
+    form: o
+    gloss: REL.cl2
+    features:
+      class: '2'
+  - id: rel.3
+    form: o
+    gloss: REL.cl3
+    features:
+      class: '3'
+  - id: rel.4
+    form: yo
+    gloss: REL.cl4
+    features:
+      class: '4'
+  - id: rel.5
+    form: lo
+    gloss: REL.cl5
+    features:
+      class: '5'
+  - id: rel.6
+    form: yo
+    gloss: REL.cl6
+    features:
+      class: '6'
+  - id: rel.7
+    form: cho
+    gloss: REL.cl7
+    features:
+      class: '7'
+  - id: rel.8
+    form: vyo
+    gloss: REL.cl8
+    features:
+      class: '8'
+  - id: rel.9
+    form: yo
+    gloss: REL.cl9
+    features:
+      class: '9'
+  - id: rel.10
+    form: zo
+    gloss: REL.cl10
+    features:
+      class: '10'
+  - id: rel.11
+    form: o
+    gloss: REL.cl11
+    features:
+      class: '11'
+  - id: rel.15
+    form: ko
+    gloss: REL.cl15
+    features:
+      class: '15'
+  - id: rel.16
+    form: po
+    gloss: REL.cl16
+    features:
+      class: '16'
+  - id: rel.17
+    form: ko
+    gloss: REL.cl17
+    features:
+      class: '17'
+  - id: rel.18
+    form: mo
+    gloss: REL.cl18
+    features:
+      class: '18'
+  OM:
+  - id: om.1
+    form: m
+    gloss: OM.cl1
+    features:
+      class: '1'
+  - id: om.2
+    form: wa
+    gloss: OM.cl2
+    features:
+      class: '2'
+  - id: om.3
+    form: u
+    gloss: OM.cl3
+    features:
+      class: '3'
+  - id: om.4
+    form: i
+    gloss: OM.cl4
+    features:
+      class: '4'
+  - id: om.5
+    form: li
+    gloss: OM.cl5
+    features:
+      class: '5'
+  - id: om.6
+    form: ya
+    gloss: OM.cl6
+    features:
+      class: '6'
+  - id: om.7
+    form: ki
+    gloss: OM.cl7
+    features:
+      class: '7'
+  - id: om.8
+    form: vi
+    gloss: OM.cl8
+    features:
+      class: '8'
+  - id: om.9
+    form: i
+    gloss: OM.cl9
+    features:
+      class: '9'
+  - id: om.10
+    form: zi
+    gloss: OM.cl10
+    features:
+      class: '10'
+  - id: om.11
+    form: u
+    gloss: OM.cl11
+    features:
+      class: '11'
+  - id: om.15
+    form: ku
+    gloss: OM.cl15
+    features:
+      class: '15'
+  - id: om.16
+    form: pa
+    gloss: OM.cl16
+    features:
+      class: '16'
+  - id: om.17
+    form: ku
+    gloss: OM.cl17
+    features:
+      class: '17'
+  - id: om.18
+    form: m
+    gloss: OM.cl18
+    features:
+      class: '18'
+  - id: om.1sg
+    form: ni
+    gloss: OM.1sg
+    features:
+      person: 1sg
+  - id: om.2sg
+    form: ku
+    gloss: OM.2sg
+    features:
+      person: 2sg
+  - id: om.1pl
+    form: tu
+    gloss: OM.1pl
+    features:
+      person: 1pl
+  - id: om.2pl
+    form: wa
+    gloss: OM.2pl
+    features:
+      person: 2pl
+  - id: om.refl
+    form: ji
+    gloss: OM.REFL
+    features:
+      reflexive: true
+  EXT: []
+  FV:
+  - id: fv.a
+    form: a
+    gloss: FV
+  - id: fv.e
+    form: e
+    gloss: FV.SUBJ
+  - id: fv.i
+    form: i
+    gloss: FV.NEG.PRES
+  PORTMANTEAU:
+  - id: negsm.1sg
+    form: si
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.1sg
+    group: neg_sm
+    features:
+      person: 1sg
+      negative: true
+  - id: negsm.2sg
+    form: hu
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.2sg
+    group: neg_sm
+    features:
+      person: 2sg
+      negative: true
+  - id: negsm.1pl
+    form: hatu
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.1pl
+    group: neg_sm
+    features:
+      person: 1pl
+      negative: true
+  - id: negsm.2pl
+    form: ham
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.2pl
+    group: neg_sm
+    features:
+      person: 2pl
+      negative: true
+  - id: negsm.1
+    form: ha
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl1
+    group: neg_sm
+    features:
+      class: '1'
+      negative: true
+  - id: negsm.2
+    form: hawa
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl2
+    group: neg_sm
+    features:
+      class: '2'
+      negative: true
+  - id: negsm.3
+    form: hau
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl3
+    group: neg_sm
+    features:
+      class: '3'
+      negative: true
+  - id: negsm.4
+    form: hai
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl4
+    group: neg_sm
+    features:
+      class: '4'
+      negative: true
+  - id: negsm.5
+    form: hali
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl5
+    group: neg_sm
+    features:
+      class: '5'
+      negative: true
+  - id: negsm.6
+    form: haya
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl6
+    group: neg_sm
+    features:
+      class: '6'
+      negative: true
+  - id: negsm.7
+    form: haki
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl7
+    group: neg_sm
+    features:
+      class: '7'
+      negative: true
+  - id: negsm.8
+    form: havi
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl8
+    group: neg_sm
+    features:
+      class: '8'
+      negative: true
+  - id: negsm.9
+    form: hai
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl9
+    group: neg_sm
+    features:
+      class: '9'
+      negative: true
+  - id: negsm.10
+    form: hazi
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl10
+    group: neg_sm
+    features:
+      class: '10'
+      negative: true
+  - id: negsm.11
+    form: hau
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl11
+    group: neg_sm
+    features:
+      class: '11'
+      negative: true
+  - id: negsm.15
+    form: haku
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl15
+    group: neg_sm
+    features:
+      class: '15'
+      negative: true
+  - id: negsm.16
+    form: hapa
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl16
+    group: neg_sm
+    features:
+      class: '16'
+      negative: true
+  - id: negsm.17
+    form: haku
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl17
+    group: neg_sm
+    features:
+      class: '17'
+      negative: true
+  - id: negsm.18
+    form: hamu
+    slots:
+    - NEG
+    - SM
+    gloss: NEG.cl18
+    group: neg_sm
+    features:
+      class: '18'
+      negative: true
+paradigms:
+- id: aff.present
+  tags:
+  - affirmative
+  - present
+  sequence:
+  - slot: SM
+    choose: &id001
+    - sm.1
+    - sm.2
+    - sm.3
+    - sm.4
+    - sm.5
+    - sm.6
+    - sm.7
+    - sm.8
+    - sm.9
+    - sm.10
+    - sm.11
+    - sm.15
+    - sm.16
+    - sm.17
+    - sm.18
+    - sm.1sg
+    - sm.2sg
+    - sm.1pl
+    - sm.2pl
+  - slot: TAM
+    choose:
+    - tam.na
+  - slot: REL
+    choose: all
+    optional: true
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.past
+  tags:
+  - affirmative
+  - past
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.li
+  - slot: REL
+    choose: all
+    optional: true
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.future
+  tags:
+  - affirmative
+  - future
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.ta
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.future.rel
+  tags:
+  - affirmative
+  - future
+  - relative
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.taka
+  - slot: REL
+    choose: all
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.perfect
+  tags:
+  - affirmative
+  - perfect
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.me
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.conditional
+  tags:
+  - affirmative
+  - conditional
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.ki
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.consecutive
+  tags:
+  - affirmative
+  - consecutive
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.ka
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.gnomic
+  tags:
+  - affirmative
+  - gnomic
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: TAM
+    choose:
+    - tam.a
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: aff.subjunctive
+  tags:
+  - affirmative
+  - subjunctive_imperative
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.e
+- id: neg.subjunctive
+  tags:
+  - negative
+  - subjunctive_imperative
+  sequence:
+  - slot: SM
+    choose: *id001
+  - slot: NEG2
+    choose:
+    - neg2.si
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.e
+- id: neg.present
+  tags:
+  - negative
+  - present
+  sequence:
+  - slot: NEG+SM
+    choose: all
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.i
+- id: neg.past
+  tags:
+  - negative
+  - past
+  sequence:
+  - slot: NEG+SM
+    choose: all
+  - slot: TAM
+    choose:
+    - tam.neg.ku
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: neg.perfect
+  tags:
+  - negative
+  - perfect
+  sequence:
+  - slot: NEG+SM
+    choose: all
+  - slot: TAM
+    choose:
+    - tam.neg.ja
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: neg.future
+  tags:
+  - negative
+  - future
+  sequence:
+  - slot: NEG+SM
+    choose: all
+  - slot: TAM
+    choose:
+    - tam.neg.ta
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+- id: infinitive
+  tags:
+  - infinitive
+  sequence:
+  - slot: SM
+    choose:
+    - inf.ku
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
