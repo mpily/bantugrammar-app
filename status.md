@@ -1,0 +1,85 @@
+# status.md — product log (newest entries last)
+
+## 2026-10-26: first build of the app (oracle, tiles, translator UI, drills, Scrabble)
+
+**Built:** `kitaita_oracle/` (pure Python + PyYAML), `data/` tables exported from
+the research repo (`mpily/BantuGrammar@8acde46`, same data as `main@c93d74d`),
+tiles from the Bible corpus, and the static page (`site/`) with Translate,
+Progress, Drills and Scrabble tabs. CI workflow: tests, then Pages deploy.
+
+**Not done yet / not verified:**
+- **Not deployed.** GitHub Pages must be switched on (Settings → Pages → Source:
+  GitHub Actions) and the branch merged to `main`.
+- **Not tested against the live Space**: this build machine cannot reach
+  `*.hf.space` (network policy). The translator, feedback, progress and
+  verified-pairs calls were tested against mocked responses copied from
+  `docs/space_api.md` (Node unit tests + a headless-Chromium end-to-end run).
+  CLAUDE.md requires opening the deployed page against the live Space before
+  calling it working, so that still needs doing after deploy.
+
+### Decisions (user, 2026-10-26)
+- Tiles are single letters; digraphs split (gh = g + h, ny = n + y, ng' = n + g);
+  apostrophe ignored. Inventory version `letters-2026-10-26`.
+- Letter frequencies from the user's Kitaita Bible corpus (`verses.jsonl`,
+  abbr TAITA, version_id 2138, 31,103 verses, sha256 in
+  `data/kitaita_corpus_stats.json`). Only aggregate counts are committed.
+
+### Tile set `letters-2026-10-26+type-counts`
+- Corpus after cleaning: 577,495 word tokens, 45,016 word types; 439,149
+  letters counted over types.
+- **Scoring uses type counts** (CLAUDE.md default; token counts over-weight
+  function words like *na*). Token-based scores differ by at most 2 points per
+  letter (e.g. n: 3 by types, 2 by tokens; c: 5 vs 7).
+- k = 2.4934 so the rarest common letter (p, count 1,268) scores 10; a = 1.
+- q and x never occur in the corpus: kept in the inventory, no tiles. No
+  occurring letter has count < 20, so nothing is flagged low_n.
+- Bag: 100 letter tiles (largest remainder, min 1) + 2 blanks.
+
+### Oracle coverage (scripts/oracle_coverage.py, seed 0)
+| Set | n | accepted | 95% CI (Wilson) |
+|---|---|---|---|
+| Hand-checked speaker-verified verb forms (tests) | 15 | 15 | — (test cases) |
+| Verified vocabulary words (`verified_vocab.json`) | 91 | 98.9% | 94.0–99.8% |
+| Bible corpus word types (≥3 letters), random sample | 2,000 | 17.9% | 16.3–19.6% |
+| Control: same sample, letters shuffled | 2,000 | 0.1% | 0.0–0.3% |
+| Bible running text (all 577,495 tokens) | 577,495 | 43.6% | — |
+
+- Corpus-root cutoff (alignment score of corpus-derived roots): 0.3 → 13.3%,
+  **0.2 → 17.8% (used)**, 0.1 → 20.9% of corpus types (measured before closed-class words were added); the shuffled control
+  stayed at 0.1% at every cutoff. 0.2 chosen as the smaller file for the
+  browser. All corpus roots are `unverified: true`.
+- Closed-class words (verified demonstratives, possessives, "of" particles,
+  function words) add 15.4 points of running-text coverage.
+- **Why most corpus words are still rejected** (sampled): no data yet for
+  verb extensions and the -agha ending (*nisikiragha*, *rakundika*,
+  *yadakabwa*), other tense markers (*uchaashoma*, *uridaike*), class/3sg
+  object markers (*kumjisha*), the "of" particle for most classes (*wa, ya,
+  ghwa, cha, ja, ra*), roots below the cutoff (*kukaia*), proper names. None
+  of these are filled in by guessing; they need speaker data.
+
+### Pyodide load time (Scrabble tab)
+- Headless Chromium, desktop: 2.2–3.2 s (files served locally).
+- Emulated phone (4x CPU slowdown): 13.1 s. **This excludes download time**
+  (Playwright's network throttling does not apply to the locally served files).
+- Download: ≈ 5.9 MB compressed (Pyodide wasm 3.2 MB + stdlib 2.3 MB + JS 0.2 MB
+  + PyYAML 0.1 MB + oracle data ~0.1 MB). Estimated ~30 s on a 1.6 Mbit/s
+  (3G-class) link, ~5 s on 10 Mbit/s 4G, on top of the CPU time.
+- **Not yet measured on a real phone over mobile data.** If 15–45 s is
+  unacceptable for the demo, decide before porting anything (options:
+  pre-load the tab during the translator demo; ship a JSON copy of the data).
+
+### Open questions for speakers
+1. Should ch / gh / ny / sh / ng' be single tiles?
+2. Past-tense subject-marker lowering (u→o, i→e: *orekoghe* vs *urekoghe*): is it
+   optional everywhere, or tied to particular verbs/classes?
+3. Linking -u- after a bare consonant marker (2pl *m*-) — general?
+4. Object markers: confirm 1sg *ni*, 1pl *di*, cl2/2pl *wi*; give 2sg and the class
+   object markers (e.g. cl9 for the *naweikunda* example).
+5. Relative markers and verb extensions (-ik-, -ish-, -w-, -an-, -agha).
+6. "of" particle for every class (only *gha* (cl.ghi) and *lwa* (cl.lu) are verified).
+7. Negative class *va*: *vi* (as submitted) or *va*?
+
+### Needs a Space API change (not faked here)
+- Drill levels L2–L4 (noun+adjective / SV / SVO with object marker) need a
+  sentence-structure tag on `/api/verified_pairs`. The API's `level` is only a
+  length heuristic, so the page groups sentences together for now.
