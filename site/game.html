@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kitaita Word Race</title>
+<meta name="description" content="Play a Kitaita word game with friends: same letters, make as many Kitaita words as you can, vote on new words.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Kitaita Word Race</h1>
+  <p class="tagline">Same letters for everyone. Make as many Kitaita words as you can before time runs out. <a href="index.html">Back to the Learning Lab</a></p>
+</header>
+<div id="waking" class="waking" hidden role="status"></div>
+<main>
+  <section id="g-start">
+    <p>Start a room and share the link (WhatsApp works), or open a link a friend sent you. No sign-up: just pick a name.</p>
+    <button id="g-create" type="button">Create a room</button>
+    <p id="g-start-status" class="muted" aria-live="polite"></p>
+  </section>
+
+  <section id="g-join" hidden>
+    <h2>Room <span class="code" id="g-join-code"></span></h2>
+    <form id="g-join-form" class="row">
+      <input id="g-name" maxlength="16" placeholder="Your name" autocomplete="nickname" required>
+      <button type="submit">Join</button>
+    </form>
+    <p id="g-join-status" class="muted" aria-live="polite"></p>
+  </section>
+
+  <section id="g-room" hidden>
+    <div class="row between">
+      <div>Room <span class="code" id="g-code"></span> · <span id="g-phase" class="muted"></span></div>
+      <div class="timer" id="g-timer" aria-live="off"></div>
+    </div>
+
+    <div id="g-share" class="share" hidden>
+      <span class="muted small">Invite players:</span>
+      <input id="g-share-url" readonly>
+      <button id="g-copy" type="button" class="secondary">Copy</button>
+      <a id="g-wa" class="button secondary" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+
+    <div id="g-lobby" hidden>
+      <div id="g-host-controls" hidden class="controls">
+        <label>Rounds <select id="g-rounds"><option>1</option><option>2</option><option selected>3</option><option>5</option></select></label>
+        <label>Seconds per round <select id="g-seconds"><option>60</option><option selected>90</option><option>120</option><option>180</option></select></label>
+        <button id="g-startgame" type="button">Start game</button>
+      </div>
+      <p id="g-wait" class="muted">Waiting for the host to start…</p>
+    </div>
+
+    <div id="g-play" hidden>
+      <div id="g-rack" class="rack big-rack" aria-label="Your tiles"></div>
+      <form id="g-word-form" class="row">
+        <input id="g-word" placeholder="Type or tap the tiles" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <button type="submit">Play</button>
+        <button type="button" id="g-clear" class="secondary">Clear</button>
+      </form>
+      <ul id="g-mywords" class="mywords"></ul>
+    </div>
+
+    <div id="g-votes"></div>
+    <div id="g-toast" class="toast" aria-live="polite"></div>
+
+    <h3>Players</h3>
+    <ol id="g-players" class="players"></ol>
+
+    <div id="g-reveal" hidden></div>
+    <p class="muted small">Words the checker rejects can be put to a vote. If most players accept, the word scores and is saved as a <em>player-accepted</em> word: unverified until players in another room accept it too (or a reviewer approves it). Nicknames are not stored.</p>
+  </section>
+</main>
+<script type="module" src="js/game.js"></script>
+</body>
+</html>
