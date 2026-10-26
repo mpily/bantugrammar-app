@@ -1,0 +1,56 @@
+name: test and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "PyYAML>=6" "pytest>=7"
+      - name: Python tests (oracle, tiles, data)
+        run: pytest -q
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: JS tests (grading, API client, views, scoring)
+        run: npm test
+      - name: Build site
+        run: scripts/build_site.sh
+      - name: End-to-end test in Chromium (real Pyodide from the CDN, mocked Space API)
+        run: |
+          npm install --no-save playwright@1.47.2
+          npx playwright install --with-deps chromium
+          node tests/e2e/page.e2e.mjs
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
