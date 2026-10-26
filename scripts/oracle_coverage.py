@@ -7,6 +7,8 @@ Reports, with n:
   * verified-sentence words (speaker text from data/): share the oracle accepts
   * corpus word types (Bible text): share accepted, split by word type and reason
   * running text: share of ALL word tokens accepted (frequency-weighted)
+  * control: one-letter substitutions of the sampled types that are not corpus words
+    (an upper bound on false accepts: some may be real words the Bible lacks)
   * control: the same corpus types with their letters shuffled. Accepted
     shuffles estimate how permissive the oracle is (over-generation).
 Only aggregate numbers are printed; no corpus text is written anywhere.
@@ -78,6 +80,16 @@ def main(argv=None):
         letters = list(w)
         rng.shuffle(letters)
         shuffled.append("".join(letters))
+    # harder control: one-letter substitutions that are NOT themselves corpus words (may include
+    # real Kitaita words the Bible lacks, so this is an upper bound on false accepts)
+    mutants = []
+    for w in sample:
+        for _ in range(20):
+            i = rng.randrange(len(w))
+            m = w[:i] + rng.choice("abcdefghijklmnoprstuvwyz") + w[i + 1:]
+            if m != w and m not in tokens:
+                mutants.append(m)
+                break
     vocab = json.loads((ROOT / "data" / "verified_vocab.json").read_text(encoding="utf-8"))["items"]
     verified_words = sorted({w for it in vocab for w in it["kitaita"].lower().split()})
     k_tok = n_tok = 0
@@ -91,7 +103,8 @@ def main(argv=None):
         "corpus_types_in_pool": len(types), "half": args.half, "seed": args.seed,
         "results": [summarize(verified_words, "verified vocabulary words (speaker)"),
                     summarize(sample, f"corpus word types, random sample"),
-                    summarize(shuffled, "control: same sample, letters shuffled")],
+                    summarize(shuffled, "control: same sample, letters shuffled"),
+                    summarize(mutants, "control: one-letter mutants not in the corpus")],
     }
     print(json.dumps(report, indent=1))
 
