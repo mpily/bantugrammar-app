@@ -60,7 +60,7 @@ def build(stats: dict, basis: str = "type") -> dict:
         tiles.append({"grapheme": g, "count": f[g], "frequency": round(f[g] / total, 5), "score": score,
                       "bag": bag[g], "in_bag": True, "low_n": f[g] < LOW_N})
     return {
-        "tile_set_version": f"{inv['version']}+{stats['generated']}+{basis}",
+        "tile_set_version": f"{inv['version']}+{basis}-counts",
         "grapheme_inventory_version": inv["version"],
         "corpus": stats["corpus"]["name"],
         "corpus_sha256": stats["corpus"]["sha256"],

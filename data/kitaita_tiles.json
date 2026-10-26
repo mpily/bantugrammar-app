@@ -1,5 +1,5 @@
 {
- "tile_set_version": "letters-2026-10-26+2026-10-26+type",
+ "tile_set_version": "letters-2026-10-26+type-counts",
  "grapheme_inventory_version": "letters-2026-10-26",
  "corpus": "Kitaita (Kidaw'ida) Bible, verses.jsonl supplied by the project owner",
  "corpus_sha256": "6910791880bd1bc2e60c4fee0cacc60a14dda98fb21d52c1ff163a2f6e1ed424",
