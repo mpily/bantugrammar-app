@@ -45,6 +45,9 @@ SRC_CORPUS = "research corpus alignment (page1_vocabulary.json, Bible parallel t
 SRC_TAM_2026_10_07 = "native-speaker correction 2026-10-07 (research page3_verb_rules.json notes)"
 SRC_PERSON_SM = "research PERSON_SUBJECT_MARKERS_BY_TAM"
 SRC_NEG = "research negation tables (Kitaita Word Bank, 2026-10-15/21, n=1 per cell)"
+SRC_CORPUS_AFFIX = ("corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus "
+                    "(scripts/affix_evidence in status.md 2026-10-26); function guessed from Bantu typology, "
+                    "NOT speaker-checked")
 SRC_OM = "research KITAITA_PERSON_OBJECT_MARKER_HYPOTHESIS (corpus-inferred, NOT speaker-verified)"
 
 NUMBER_BY_CLASS = {  # from nearest Swahili class in research kitaita_demonstrative_concord.json
@@ -364,6 +367,23 @@ def build_verb_slots(v, classes):
         {"id": "fv.eghe.negpast", "form": v.NEGATIVE_CLASS_PAST_SUFFIX, "gloss": "FV.NEG.PAST", "unverified": False,
          "source": SRC_NEG},
     ]
+    # corpus-attested extensions and endings (word-type counts after the 42 verified roots, 2026-10-26)
+    ext = []
+    for form, gloss, n in (("w", "PASS", 230), ("lw", "PASS (after vowel)", 60), ("ek", "STAT", 56),
+                           ("ik", "STAT", 30), ("i", "APPL", 159), ("ir", "APPL", 32), ("er", "APPL", 41),
+                           ("yer", "APPL (after won-)", 38), ("el", "APPL", 36), ("il", "APPL", 26),
+                           ("ish", "CAUS", 27), ("is", "CAUS", 24), ("an", "RECP", 26)):
+        ext.append({"id": f"ext.{form}", "form": form, "gloss": gloss, "unverified": True,
+                    "source": f"{SRC_CORPUS_AFFIX}; {n} word types"})
+    corpus_fv = []
+    for form, gloss, n in (("agha", "HAB/IPFV", 255), ("ie", "PFV/SUBJ?", 192), ("ieghe", "PAST.PFV", 113),
+                           ("eghe", "PAST.PFV", 50), ("o", "FV -o (function unknown)", 79),
+                           ("e", "FV -e (subjunctive/past?)", 353)):
+        corpus_fv.append({"id": f"fv.corpus.{form}", "form": form, "gloss": gloss, "unverified": True,
+                          "source": f"{SRC_CORPUS_AFFIX}; {n} word types"})
+    fv += corpus_fv
+    fv.append({"id": "fv.corpus.enyi", "form": "enyi", "gloss": "IMP.PL?", "unverified": True,
+               "source": f"{SRC_CORPUS_AFFIX}; 12 word types (sikirenyi)"})
     neg = [{"id": "neg.nde", "form": v.NEGATIVE_MARKER_KITAITA, "gloss": "NEG", "unverified": False, "source": SRC_NEG}]
 
     portmanteau = []
@@ -461,18 +481,22 @@ def build_verb_slots(v, classes):
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.e.neg"]},
     ]
+    for p in paradigms:  # corpus endings are allowed after any licensed prefix chain (unverified)
+        p["fv"] = p["fv"] + [f["id"] for f in corpus_fv if f["id"] not in p["fv"]]
+        if p["id"] == "imperative":
+            p["fv"].append("fv.corpus.enyi")
     return {
         "language": "dav",
         "template": ["NEG", "SM", "NEG2", "TAM", "REL", "OM", "ROOT", "EXT", "FV"],
         "notes": [
             "Paradigms ARE the co-occurrence constraints: a slot combination is licensed only if one "
             "paradigm lists it. Any licensed prefix chain attaches to ANY root in kitaita_roots.yaml.",
-            "REL and EXT have no Kitaita data yet: their inventories are empty, so relative and extended "
-            "verb forms come back invalid rather than guessed.",
+            "REL has no Kitaita data yet (empty inventory). EXT (extensions) and the extra endings marked "
+            "'corpus pattern' were read off the Bible corpus after speaker-verified roots: unverified.",
             "Object markers are corpus-inferred hypotheses (1sg ni, 1pl di, cl2/2pl wi); class OMs "
             "have no data yet.",
         ],
-        "morphemes": {"NEG": neg, "SM": sm, "NEG2": [], "TAM": tam, "REL": [], "OM": om, "EXT": [], "FV": fv,
+        "morphemes": {"NEG": neg, "SM": sm, "NEG2": [], "TAM": tam, "REL": [], "OM": om, "EXT": ext, "FV": fv,
                       "PORTMANTEAU": portmanteau},
         "paradigms": paradigms,
     }
