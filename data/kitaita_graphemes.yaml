@@ -1,0 +1,9 @@
+# Tile inventory for Kitaita Scrabble.
+# DECISION (project owner, 2026-10-26): tiles are SINGLE LETTERS. Digraphs
+# are split into their letters: gh = g + h, ny = n + y, ng' = n + g.
+# The apostrophe is ignored for now (stripped before tokenizing).
+# Revisit with speakers: whether ch / gh / ny / sh / ng' should be single tiles.
+version: "letters-2026-10-26"
+decided_by: "project owner (chat, 2026-10-26)"
+ignore_characters: ["'", "’", "‘", "ʼ", "`"]
+graphemes: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
