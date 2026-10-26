@@ -141,3 +141,14 @@ def test_no_swahili_meaning_for_unverified_roots_or_nouns():
         assert corpus_noun["swahili_equivalent"] is None
     verified = next(p for p in analyse("mwana")["parses"] if p["word_type"] == "noun")
     assert verified["swahili_equivalent"] == "mtoto"
+
+
+def test_player_accepted_words():
+    from kitaita_oracle import Oracle
+    o = Oracle()
+    assert o.analyse("zzyzx")["valid"] is False
+    o.set_player_words([{"word": "Zzyzx", "status": "player_accepted", "n_rooms": 1},
+                        {"word": "qqq", "status": "verified", "n_rooms": 2}])
+    p = o.analyse("zzyzx")["parses"][0]
+    assert p["word_type"] == "player_accepted" and p["uses_unverified_rules"]
+    assert o.analyse("qqq")["parses"][0]["uses_unverified_rules"] is False

@@ -39,6 +39,14 @@ class Oracle:
         self.closed: dict[str, list[dict]] = {}
         for c in load_yaml("kitaita_closed_class.yaml", data_dir)["words"]:
             self.closed.setdefault(normalize_word(c["form"]), []).append(c)
+        self.player_words: dict[str, dict] = {}
+
+    def set_player_words(self, words: list[dict]) -> None:
+        """Words that players voted to accept in multiplayer games (the Space's
+        /api/player_words feed: [{"word", "status": "player_accepted"|"verified", ...}]).
+        They are accepted as word_type 'player_accepted'; only status 'verified'
+        counts as verified data."""
+        self.player_words = {normalize_word(w["word"]): w for w in words if w.get("word")}
 
     def swahili_grammar(self) -> VerbGrammar:
         if "swh" not in self.verbs:
@@ -59,6 +67,14 @@ class Oracle:
             parses += self._nouns(w)
             parses += self._closed_class(w)
             parses += self._adjectives(w)
+            pw = self.player_words.get(w)
+            if pw is not None:
+                verified = pw.get("status") == "verified"
+                parses.append({"word_type": "player_accepted",
+                               "slots": [{"slot": "WORD", "form": w, "gloss": "accepted by players' vote"}],
+                               "status": pw.get("status"), "n_rooms": pw.get("n_rooms"),
+                               "swahili_equivalent": None, "uses_unverified_rules": not verified,
+                               "unverified_items": [] if verified else ["accepted by player vote (not speaker-verified)"]})
             for p in self.verbs["dav"].parse(w):
                 p["swahili_equivalents"] = self._swahili_equivalents(p)
                 p["swahili_equivalent"] = p["swahili_equivalents"][0] if p["swahili_equivalents"] else None
