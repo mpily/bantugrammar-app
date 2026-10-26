@@ -59,6 +59,16 @@ class VerbGrammar:
         self.roots: dict[str, dict] = {}
         for r in roots:
             self.roots.setdefault(r["root"], r)
+        # optional extra root lists; curated roots take precedence:
+        #   *_roots_reported.yaml  roots reported by the project owner / speakers, not yet in the research tables
+        #   *_roots_induced.yaml   roots induced from the corpus (scripts/induce_roots.py)
+        for extra in ("reported", "induced"):
+            try:
+                rows = load_yaml(f"{prefix}_roots_{extra}.yaml", data_dir)["roots"]
+            except FileNotFoundError:
+                rows = []
+            for r in rows:
+                self.roots.setdefault(r["root"], {**r, "_origin": extra})
         self.template: list[str] = self.slots_data["template"]
         self.vowels = self.phon.get("vowels", VOWEL_DEFAULT)
         self.inventory: dict[str, list[dict]] = {}
@@ -208,6 +218,17 @@ class VerbGrammar:
                         if e["form"] and b.endswith(e["form"]):
                             stack.append((b[: -len(e["form"])], chosen + [e]))
 
+    @classmethod
+    def rank_key(cls, p: dict):
+        """Most trustworthy analysis first: a speaker-verified root, then the fewest
+        unverified assumptions, then the reading that recognizes the most morphemes
+        (shorter root), fewer empty slots, a verified paradigm."""
+        root = p["_root"]
+        origin = 1 if root.get("unverified") else 0  # all unverified roots (corpus, induced, reported) rank alike
+        empties = sum(1 for s in p["slots"] if s["slot"] != "ROOT" and not s["form"])
+        return (origin, len(p["unverified_items"]), len(root["root"]), empties,
+                bool(p["_chain"].paradigm.get("unverified")))
+
     def parse(self, word: str) -> list[dict]:
         word = word.lower()
         parses = []
@@ -220,7 +241,7 @@ class VerbGrammar:
                     if entry is None or not root:
                         continue
                     parses.append(self._describe(word, real, entry, exts, fv))
-        return parses
+        return sorted(parses, key=self.rank_key)
 
     def _describe(self, word, real: Realization, root: dict, exts, fv) -> dict:
         slots = []
@@ -234,7 +255,8 @@ class VerbGrammar:
                 s["unverified"] = True
                 unverified.append(f"{m.slot} {mm['id']}")
             slots.append(s)
-        root_slot = {"slot": "ROOT", "form": root["root"], "gloss": _root_gloss(root)}
+        root_slot = {"slot": "ROOT", "form": root["root"], "gloss": _root_gloss(root),
+                     "source": root.get("_origin", "curated")}
         if root.get("unverified"):
             root_slot["unverified"] = True
             unverified.append(f"ROOT {root['root']}")

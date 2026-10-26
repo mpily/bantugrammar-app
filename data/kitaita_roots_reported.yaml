@@ -1,0 +1,8 @@
+# Kitaita verb roots REPORTED by the project owner but not (yet) in the research
+# repo's verified tables or attested in the Bible corpus. Hand-maintained.
+# Move a root to the research tables (and re-export) once a speaker confirms it.
+roots:
+- root: gal
+  swahili: []
+  unverified: true
+  source: "project owner, 2026-10-26: 'gala' should be accepted as a verb (meaning not recorded; no inflected form in the Bible corpus)"
