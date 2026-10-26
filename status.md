@@ -83,3 +83,52 @@ Progress, Drills and Scrabble tabs. CI workflow: tests, then Pages deploy.
 - Drill levels L2–L4 (noun+adjective / SV / SVO with object marker) need a
   sentence-structure tag on `/api/verified_pairs`. The API's `level` is only a
   length heuristic, so the page groups sentences together for now.
+
+## 2026-10-26 (cont.): verb detection — "gala"/"legha" were rejected; coverage 18.9% → 55.2%
+
+User report: the verbs *gala* and *legha* were refused. Causes: (1) the root
+*legh* was missing (the research alignment never extracted it, though the corpus
+has *kulegha* 50×, *ukalegha* 44×, *wikalegha* 30×); (2) bare forms (root + -a)
+had no paradigm; (3) *gala* has no inflected form anywhere in the corpus.
+
+**Method.** One change at a time, each measured on the HELD-OUT half of corpus
+word types (`split_half` in `scripts/oracle_coverage.py`; roots are induced
+from the other half only), n = 3,000 sampled types, with controls: the same
+words with letters shuffled, and (from E5) one-letter mutants that are not
+corpus words.
+
+| Step | Change (all new items `unverified: true`) | Held-out accepted | 95% CI | Shuffled control |
+|---|---|---|---|---|
+| E0 | baseline | 18.9% | 17.6–20.4 | 0.1% |
+| E1 | bare imperative/citation form (root + -a), reported by the project owner | 19.9% | 18.5–21.3 | 0.1% |
+| E3a | corpus suffixes after verified roots: passive -w-/-lw-, stative -ek-/-ik-, applicative -i-/-ir-/-er-/-el-/-il-, causative -ish-/-is-, reciprocal -an-; endings -agha, -ie, -ieghe, -eghe, -o, -e | 30.4% | 28.8–32.1 | 0.1% |
+| E4a | corpus object markers m-, i-, ku-, ri-, ghi-, ji-, chi-, ghu- | 33.7% | 32.1–35.4 | 0.1% |
+| E4b | future -chaa-; na-/kwa- and fused SMs before perfect -da-; class negative subjunctive -se-; ending -oghe | 35.9% | 34.2–37.6 | 0.1% |
+| E5 | roots induced from the corpus (`scripts/induce_roots.py`) | **55.2%** | 53.4–57.0 | 0.2% (0.1–0.4) |
+
+- E5 harder control: one-letter mutants not in the corpus are accepted 4.3%
+  (3.6–5.1%), vs 55% for real held-out words. Some mutants may be real words
+  the Bible lacks, so this is an upper bound on false accepts.
+- Running text (all 577,495 tokens, roots induced from the train half): 56.6%.
+- Speaker-verified vocabulary words: 91/91.
+- **Root induction:** a candidate root is kept only if it follows ≥3 different
+  licensed prefixes, ≥2 of them "strong" (tense marker, infinitive ku- or
+  negation). Candidates are dropped when they are affix fragments (*egh*),
+  a known root plus ≤3 letters or plus object marker/extensions (*mzer* = m + *zer*,
+  *kaiagh* = *kai* + *-agh-*), or a known root minus a leading marker with less
+  evidence (*any* vs *many*). The shipped file uses the whole corpus: 526 roots,
+  no glosses (the corpus shows a string behaves like a root, not what it means).
+- **Reported roots:** `data/kitaita_roots_reported.yaml` holds roots the project
+  owner reports but the corpus does not attest: `gal` (*gala*). Meaning not
+  recorded yet.
+- **Analysis order:** speaker-verified root first, then fewest unverified
+  assumptions, then shorter root (more morphemes recognized). Known wrong
+  order: *wikamlegha* lists the research corpus root *mlegh* before m + *legh*.
+- Oracle load in headless desktop Chromium: 4.6 s (was 2.2–3.2 s), because of
+  the larger root list and the extra paradigms.
+
+**Open questions for speakers (added):** what does *gala* mean, and how is it
+inflected? Are the suffix functions guessed above right (-agha habitual,
+-ieghe/-eghe/-oghe past perfective, -w- passive, -ir-/-er- applicative,
+-ish- causative, -an- reciprocal)? Is *-chaa-* a separate future? Do class
+subjects take negative subjunctive *-se-*?
