@@ -132,3 +132,32 @@ inflected? Are the suffix functions guessed above right (-agha habitual,
 -ieghe/-eghe/-oghe past perfective, -w- passive, -ir-/-er- applicative,
 -ish- causative, -an- reciprocal)? Is *-chaa-* a separate future? Do class
 subjects take negative subjunctive *-se-*?
+
+## 2026-10-26 (cont. 2): Swahili meanings hidden for unverified items; multiplayer Word Race
+
+**Swahili meanings (user request):** a root or noun gloss that comes from
+automatic alignment is no longer shown (e.g. *kurashana* was glossed
+"kuyotayarishwa", *mzuri* "mfalme"). Only speaker-given meanings appear; the
+alignment guesses stay in the data as `swahili_unverified`.
+
+**Word Race (`site/game.html`, user decisions: rooms on the HF Space, round-based
+race, "majority accepts, logged unverified"):** create a room, share the link
+(copy or WhatsApp), join with a nickname. Every player gets the same 10 tiles
+(≥4 vowels) for 60–180 s; words score their tile values (+10 for 7+ letters).
+A word the checker rejects can be put to a vote; if most votes cast say yes it
+scores and becomes a *player-accepted* word (unverified) that the oracle accepts
+for everyone, including the Scrabble tab (`/api/player_words`). It becomes
+*verified* after acceptance in 2 different rooms or by a reviewer. The room
+server and word checking run on the Space (research repo `hf_space/api/game.py`),
+so phones don't load Pyodide for the game.
+
+**Checks:** pytest 67 passed; node 37 passed; page e2e OK; new two-player e2e
+(`tests/e2e/game.e2e.mjs`, desktop + phone-sized browsers) against the real
+Space API running locally: create → share link → join → same rack → word not in
+rack rejected → tap-to-type → rejected word challenged → other player votes yes
+→ scored as player-accepted; timer counts down; invite box hidden during rounds.
+
+**Not done:** not deployed (needs the research branch merged AND the Space's
+`hf_space/` updated, then this branch merged for Pages); the game e2e is not in
+CI (it needs a running Space); a dropped connection rejoins as a new player
+(score restarts).

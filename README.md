@@ -10,6 +10,7 @@ A static web page (GitHub Pages, no server) for Kitaita (Kidaw'ida, ISO `dav`):
 | **Progress** | Ratings, agreement with speakers, verified-pair counts, always with n and low-n flags | Computed by the Space |
 | **Drills** | Type the Kitaita (or Swahili) for speaker-verified pairs; graded in the browser | `/api/verified_pairs` + [`data/verified_vocab.json`](data/verified_vocab.json) |
 | **Scrabble** | Checks a word with the marker-oracle and scores it with letter-frequency tiles | [`kitaita_oracle/`](kitaita_oracle/), in the browser via Pyodide |
+| **Word Race** (`game.html`) | Multiplayer, skribbl-style: share a room link, everyone gets the same tiles, make Kitaita words; vote to accept words the checker rejects | Rooms run on the Space (WebSocket); words checked there by the same oracle |
 
 Nothing unverified is presented as correct: translator output is labelled
 *machine translation — awaiting native-speaker review*, words the pipeline
@@ -57,6 +58,7 @@ pip install pyyaml pytest && pytest -q        # oracle, tiles, data hygiene
 npm test                                      # grading, API client, views, scoring (no dependencies)
 scripts/build_site.sh && python3 -m http.server -d _site 8000   # preview at http://localhost:8000
 node tests/e2e/page.e2e.mjs                   # full page in headless Chromium (needs playwright)
+GAME_API=http://127.0.0.1:7860 node tests/e2e/game.e2e.mjs   # two players against a locally running Space
 ```
 
 Offline data scripts (not run in CI):
