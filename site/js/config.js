@@ -46,4 +46,8 @@ export const ORACLE_DATA_FILES = [
 export const TILES_URL = "data/kitaita_tiles.json";
 export const VERIFIED_VOCAB_URL = "data/verified_vocab.json";
 
+// Replaced by scripts/build_site.sh with the deploy's commit id (cache-busting for fetched files).
+export const BUILD_VERSION = "dev";
+export const withVersion = (url) => `${url}${url.includes("?") ? "&" : "?"}v=${BUILD_VERSION}`;
+
 export const MACHINE_LABEL = "machine translation — awaiting native-speaker review";
