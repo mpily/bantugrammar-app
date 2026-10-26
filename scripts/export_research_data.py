@@ -420,6 +420,12 @@ def build_verb_slots(v, classes):
                       {"slot": "TAM", "choose": ["tam.cond.ki", "tam.cond.ka"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.a"]},
+        {"id": "imperative", "tags": ["affirmative", "imperative"], "unverified": True,
+         "note": "bare root + -a (imperative / citation form), e.g. 'legha'. Reported by the project owner "
+                 "2026-10-26; not yet in the research tables. Note: bare 'legha' itself does not occur in the "
+                 "Bible corpus.",
+         "sequence": [],
+         "fv": ["fv.a"]},
         {"id": "infinitive", "tags": ["infinitive"], "unverified": False,
          "sequence": [{"slot": "SM", "choose": ["inf.ku"]},
                       {"slot": "OM", "choose": "all", "optional": True}],

@@ -982,6 +982,16 @@ paradigms:
     optional: true
   fv:
   - fv.a
+- id: imperative
+  tags:
+  - affirmative
+  - imperative
+  unverified: true
+  note: 'bare root + -a (imperative / citation form), e.g. ''legha''. Reported by the project owner 2026-10-26;
+    not yet in the research tables. Note: bare ''legha'' itself does not occur in the Bible corpus.'
+  sequence: []
+  fv:
+  - fv.a
 - id: infinitive
   tags:
   - infinitive
