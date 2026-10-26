@@ -243,13 +243,16 @@ def build_nouns(v, tables, classes, dem):
         e = entries.get(form)
         if e is None:
             e = entries[form] = {"form": form, "class": None, "number": "unknown", "swahili": [],
-                                 "unverified": True, "class_unverified": True, "sources": []}
+                                 "swahili_unverified": [], "unverified": True, "class_unverified": True,
+                                 "sources": []}
         if cls and (e["class"] is None or (e["class_unverified"] and not unverified)):
             e["class"], e["class_unverified"] = cls, unverified
             e["number"] = classes.get(cls, {}).get("number", "unknown")
+        # speaker-given glosses and alignment guesses are kept apart: only `swahili` is shown
+        key = "swahili_unverified" if unverified else "swahili"
         for s in sorted(swahili):
-            if s not in e["swahili"]:
-                e["swahili"].append(s)
+            if s not in e[key]:
+                e[key].append(s)
         e["unverified"] = e["unverified"] and unverified
         if source not in e["sources"]:
             e["sources"].append(source)
@@ -267,6 +270,8 @@ def build_nouns(v, tables, classes, dem):
         kit = cand.get("kitaita_word") or ""
         cls = (noun_class_of.get(kit) or {}).get("subject_marker")
         put(kit, cls, {lemma}, True, SRC_CORPUS)
+    for e in entries.values():
+        e["swahili_unverified"] = [x for x in e["swahili_unverified"] if x not in e["swahili"]]
     return sorted(entries.values(), key=lambda e: e["form"])
 
 

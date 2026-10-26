@@ -368,6 +368,10 @@ def _matches(morpheme: dict, want: dict) -> bool:
 
 
 def _root_gloss(root: dict) -> str | None:
+    """Swahili gloss of a root, only when the root is speaker-verified: glosses of
+    unverified roots come from automatic alignment and are often wrong."""
+    if root.get("unverified"):
+        return None
     sw = root.get("swahili") or []
     if isinstance(sw, str):
         sw = [sw]

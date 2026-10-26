@@ -75,8 +75,9 @@ class Oracle:
                 unverified.append("noun entry (corpus-aligned)")
             if n.get("class") and n.get("class_unverified"):
                 unverified.append("noun class")
-            out.append({"word_type": "noun", "slots": [{"slot": "NOUN", "form": n["form"],
-                                                        "gloss": ", ".join(n.get("swahili") or []) or None}],
+            # only speaker-given glosses (`swahili`); alignment guesses (`swahili_unverified`) are hidden
+            gloss = ", ".join(n.get("swahili") or []) or None
+            out.append({"word_type": "noun", "slots": [{"slot": "NOUN", "form": n["form"], "gloss": gloss}],
                         "class": n.get("class"), "number": n.get("number"),
                         "swahili_equivalent": (n.get("swahili") or [None])[0],
                         "uses_unverified_rules": bool(unverified), "unverified_items": unverified})
@@ -145,6 +146,8 @@ class Oracle:
     # ------------------------------------------------------------------ verbs: swahili equivalent
     def _swahili_equivalents(self, parse: dict) -> list[str]:
         chain, root, fv = parse["_chain"], parse["_root"], parse["_fv"]
+        if root.get("unverified"):
+            return []  # the Swahili side of an unverified root is an alignment guess: don't show it
         tags = {t for t in chain.paradigm.get("tags", []) if t in ("affirmative", "negative", "infinitive")}
         wants_options: list[dict] = [{}]
         for m in chain.morphemes:

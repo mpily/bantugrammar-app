@@ -70,7 +70,7 @@ def test_swahili_parallel_parser():
 
 
 @pytest.mark.parametrize("word,swahili", [
-    ("kwawemanya", "unajua"), ("nerekoghe", "nilikuwa"), ("ndeukunde", "hapendi"),
+    ("rawewona", "anaona"), ("nerekoghe", "nilikuwa"), ("ndeukunde", "hapendi"),
 ])
 def test_swahili_equivalent(word, swahili):
     eqs = {e for p in verb_parses(word) for e in p["swahili_equivalents"]}
@@ -129,3 +129,15 @@ def test_reported_and_induced_roots_are_labelled():
     assert p["slots"][0]["source"] == "reported" and p["uses_unverified_rules"]
     p = analyse("legha")["parses"][0]
     assert p["slots"][0]["source"] == "induced"
+
+
+def test_no_swahili_meaning_for_unverified_roots_or_nouns():
+    for p in analyse("kurashana")["parses"] + analyse("wawemanya")["parses"]:
+        root = next(s for s in p["slots"] if s["slot"] == "ROOT")
+        if root.get("unverified"):
+            assert root["gloss"] is None and p["swahili_equivalent"] is None and p["swahili_equivalents"] == []
+    corpus_noun = next(p for p in analyse("mlungu")["parses"] if p["word_type"] == "noun")
+    if corpus_noun["uses_unverified_rules"] and "noun entry" in " ".join(corpus_noun["unverified_items"]):
+        assert corpus_noun["swahili_equivalent"] is None
+    verified = next(p for p in analyse("mwana")["parses"] if p["word_type"] == "noun")
+    assert verified["swahili_equivalent"] == "mtoto"
