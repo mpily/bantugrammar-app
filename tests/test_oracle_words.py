@@ -99,3 +99,12 @@ def test_ambiguity_is_enumerated():
 def test_apostrophes_and_case():
     assert analyse("WAWEMANYA")["valid"]
     assert analyse("Mundu")["valid"]
+
+
+@pytest.mark.parametrize("word,word_type", [
+    ("uo", "demonstrative"), ("iji", "demonstrative"), ("awo", "demonstrative"),
+    ("wake", "possessive"), ("gha", "associative"), ("aighu", "function_word"), ("na", "function_word"),
+])
+def test_closed_class_words(word, word_type):
+    r = analyse(word)
+    assert r["valid"] and any(p["word_type"] == word_type for p in r["parses"])

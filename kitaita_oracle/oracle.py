@@ -2,6 +2,8 @@
 
 Word types (all returned when several match):
   noun       dictionary lookup only (data/kitaita_nouns.yaml)
+  demonstrative / possessive / associative / function_word
+             dictionary lookup only (data/kitaita_closed_class.yaml)
   adjective  concord prefix (data/kitaita_concord.yaml) + stem (data/kitaita_adjectives.yaml)
   verb       slot-template parse (verbs.py + data/kitaita_verb_slots.yaml)
 
@@ -34,6 +36,9 @@ class Oracle:
         for n in load_yaml("kitaita_nouns.yaml", data_dir)["nouns"]:
             self.nouns.setdefault(normalize_word(n["form"]), []).append(n)
         self.adj_stems = load_yaml("kitaita_adjectives.yaml", data_dir)["stems"]
+        self.closed: dict[str, list[dict]] = {}
+        for c in load_yaml("kitaita_closed_class.yaml", data_dir)["words"]:
+            self.closed.setdefault(normalize_word(c["form"]), []).append(c)
 
     def swahili_grammar(self) -> VerbGrammar:
         if "swh" not in self.verbs:
@@ -52,6 +57,7 @@ class Oracle:
         parses = []
         if w:
             parses += self._nouns(w)
+            parses += self._closed_class(w)
             parses += self._adjectives(w)
             for p in self.verbs["dav"].parse(w):
                 p["swahili_equivalents"] = self._swahili_equivalents(p)
@@ -74,6 +80,17 @@ class Oracle:
                         "class": n.get("class"), "number": n.get("number"),
                         "swahili_equivalent": (n.get("swahili") or [None])[0],
                         "uses_unverified_rules": bool(unverified), "unverified_items": unverified})
+        return out
+
+    # ------------------------------------------------------------------ closed class
+    def _closed_class(self, w: str) -> list[dict]:
+        out = []
+        for c in self.closed.get(w, []):
+            items = [f"{c['category']} entry"] if c.get("unverified") else []
+            out.append({"word_type": c["category"], "slots": [{"slot": c["category"].upper(), "form": c["form"],
+                                                               "gloss": c.get("gloss")}],
+                        "class": c.get("class"), "swahili_equivalent": c.get("gloss"),
+                        "uses_unverified_rules": bool(items), "unverified_items": items})
         return out
 
     # ------------------------------------------------------------------ adjectives

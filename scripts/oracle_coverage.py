@@ -6,6 +6,7 @@
 Reports, with n:
   * verified-sentence words (speaker text from data/): share the oracle accepts
   * corpus word types (Bible text): share accepted, split by word type and reason
+  * running text: share of ALL word tokens accepted (frequency-weighted)
   * control: the same corpus types with their letters shuffled. Accepted
     shuffles estimate how permissive the oracle is (over-generation).
 Only aggregate numbers are printed; no corpus text is written anywhere.
@@ -70,7 +71,14 @@ def main(argv=None):
         shuffled.append("".join(letters))
     vocab = json.loads((ROOT / "data" / "verified_vocab.json").read_text(encoding="utf-8"))["items"]
     verified_words = sorted({w for it in vocab for w in it["kitaita"].lower().split()})
+    k_tok = n_tok = 0
+    for w, n in tokens.items():
+        n_tok += n
+        if analyse(w)["valid"]:
+            k_tok += n
     report = {
+        "running_text": {"tokens": n_tok, "accepted_tokens": k_tok, "rate": round(k_tok / n_tok, 3),
+                         "note": "all word tokens (any length), weighted by frequency"},
         "corpus_types_total": len(types), "seed": args.seed,
         "results": [summarize(verified_words, "verified vocabulary words (speaker)"),
                     summarize(sample, f"corpus word types, random sample"),

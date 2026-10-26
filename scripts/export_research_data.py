@@ -503,6 +503,42 @@ def build_phonology(v):
     }
 
 
+def build_closed_class(v):
+    """Closed-class words: dictionary lookup, like nouns (no generation)."""
+    rows = []
+    sw_dem = {"proximal": "huyu/hii/hiki...", "referential": "huyo/hiyo/hicho...", "distal": "yule/ile/kile..."}
+    for degree, table in (("proximal", v.KITAITA_DEM_PROXIMAL_VERIFIED),
+                          ("referential", v.KITAITA_DEM_REFERENTIAL_VERIFIED),
+                          ("distal", v.KITAITA_DEM_DISTAL_VERIFIED)):
+        for cid, form in table.items():
+            rows.append({"form": form, "category": "demonstrative", "class": cid, "gloss": f"{degree} ({sw_dem[degree]})",
+                         "unverified": False, "source": "research KITAITA_DEM_*_VERIFIED (native-speaker answers)"})
+    sw_poss = {"angu": "-angu", "ako": "-ako", "ake": "-ake", "etu": "-etu", "enu": "-enu", "ao": "-ao"}
+    for cid, cells in v.POSS_PERSON_FORM_BY_CLASS.items():
+        for person, form in cells.items():
+            rows.append({"form": form, "category": "possessive", "class": cid, "gloss": sw_poss[person],
+                         "unverified": False,
+                         "source": "research POSS_PERSON_FORM_BY_CLASS (Word Bank Possessives tab, 2026-10-22)"})
+    for cid, form in v.KITAITA_ASSOCIATIVE_VERIFIED.items():
+        rows.append({"form": form, "category": "associative", "class": cid, "gloss": "-a (of)", "unverified": False,
+                     "source": "research KITAITA_ASSOCIATIVE_VERIFIED (native-speaker corrections)"})
+    for cid, form in v.KITAITA_ASSOCIATIVE_DESCRIPTOR_VERIFIED.items():
+        rows.append({"form": form, "category": "associative_descriptor", "class": cid, "gloss": "-a (descriptive of)",
+                     "unverified": False, "source": "research KITAITA_ASSOCIATIVE_DESCRIPTOR_VERIFIED"})
+    for sw, form in v.FUNCTION_WORD_TRANSLATIONS.items():
+        rows.append({"form": form, "category": "function_word", "class": None, "gloss": sw, "unverified": False,
+                     "source": "research FUNCTION_WORD_TRANSLATIONS (native-speaker corrections; 'na' from corpus text)"})
+    merged = {}
+    for r in rows:
+        key = (r["form"], r["category"], r["class"])
+        if key in merged:
+            if r["gloss"] not in merged[key]["gloss"]:
+                merged[key]["gloss"] += "; " + r["gloss"]
+        else:
+            merged[key] = r
+    return sorted(merged.values(), key=lambda r: (r["form"], r["category"]))
+
+
 def build_verified_vocab(v):
     sm_of = v.VERIFIED_SUBJECT_MARKERS
     items = []
@@ -549,6 +585,9 @@ def main(argv=None) -> int:
     dump_yaml(DATA / "kitaita_verb_slots.yaml", h("Kitaita verb slot inventories and paradigms"),
               build_verb_slots(v, classes))
     dump_yaml(DATA / "kitaita_phonology.yaml", h("Kitaita morphophonological rules"), build_phonology(v))
+    dump_yaml(DATA / "kitaita_closed_class.yaml",
+              h("Kitaita closed-class words: demonstratives, possessives, associatives, function words"),
+              {"words": build_closed_class(v)})
     dump_yaml(DATA / "swahili_roots.yaml", h("Swahili verb roots for the parallel parser"),
               {"roots": build_swahili_roots(v, p1)})
     (DATA / "verified_vocab.json").write_text(json.dumps(
