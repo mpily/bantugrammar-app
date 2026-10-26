@@ -1,5 +1,5 @@
 // Page wiring: tabs, translator, progress, drills, scrabble.
-import { makeClient, ApiError } from "./api.js";
+import { makeClient } from "./api.js";
 import { MACHINE_LABEL, ORACLE_DATA_FILES, ORACLE_PY_FILES, PYODIDE_URL, TILES_URL, VERIFIED_VOCAB_URL, withVersion } from "./config.js";
 import { buildItems, filterItems, promptFor } from "./drill_logic.js";
 import { grade } from "./grading.js";
@@ -25,11 +25,7 @@ async function withBanner(fn) {
 }
 
 function errorText(err) {
-  if (err instanceof ApiError) {
-    const detail = err.body && Array.isArray(err.body.detail) ? ": " + err.body.detail.map((d) => d.msg).join("; ") : "";
-    return `${err.message}${detail}`;
-  }
-  return String(err && err.message ? err.message : err);
+  return String(err && err.message ? err.message : err); // ApiError messages already include status + detail
 }
 
 // ------------------------------------------------------------------ tabs

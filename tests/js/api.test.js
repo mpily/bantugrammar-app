@@ -48,7 +48,7 @@ test("gives up after the retry budget", async () => {
 test("API errors surface the contract error body (no retry on 4xx)", async () => {
   let n = 0;
   const api = makeClient({ base: "", delays: [1, 1], sleep: async () => {}, fetchImpl: async () => { n++; return res(404, { api_version: "1", error: "translation_id 'x' not found" }); } });
-  await assert.rejects(api.feedback({ translation_id: "x", stars: 3, speaker_id: "s" }), /not found/);
+  await assert.rejects(api.feedback({ translation_id: "x", stars: 3, speaker_id: "s" }), /HTTP 404: translation_id .x. not found/);
   assert.equal(n, 1);
 });
 
@@ -65,3 +65,13 @@ test("verified_pairs query string", async () => {
 });
 
 export { TRANSLATE };
+
+test("error messages are readable for any error shape", async () => {
+  const { errorMessage } = await import("../../site/js/api.js");
+  assert.equal(errorMessage(404, { api_version: "1", error: "room not found" }), "HTTP 404: room not found");
+  assert.equal(errorMessage(404, { detail: "Not Found" }), "HTTP 404: Not Found");
+  assert.equal(errorMessage(503, { error: { type: "space_error", message: "Space is building" } }), "HTTP 503: Space is building");
+  assert.equal(errorMessage(422, { detail: [{ msg: "field required" }] }), "HTTP 422: field required");
+  assert.equal(errorMessage(500, null), "HTTP 500");
+  assert.doesNotMatch(errorMessage(500, { error: { code: 7 } }), /object Object/);
+});
