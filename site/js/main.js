@@ -1,6 +1,6 @@
 // Page wiring: tabs, translator, progress, drills, scrabble.
 import { makeClient, ApiError } from "./api.js";
-import { MACHINE_LABEL, ORACLE_DATA_FILES, ORACLE_PY_FILES, PYODIDE_URL, TILES_URL, VERIFIED_VOCAB_URL } from "./config.js";
+import { MACHINE_LABEL, ORACLE_DATA_FILES, ORACLE_PY_FILES, PYODIDE_URL, TILES_URL, VERIFIED_VOCAB_URL, withVersion } from "./config.js";
 import { buildItems, filterItems, promptFor } from "./drill_logic.js";
 import { grade } from "./grading.js";
 import { load, save } from "./storage.js";
@@ -168,7 +168,7 @@ async function initDrills() {
   }
   let vocab = [];
   try {
-    vocab = (await (await fetch(VERIFIED_VOCAB_URL)).json()).items;
+    vocab = (await (await fetch(withVersion(VERIFIED_VOCAB_URL))).json()).items;
   } catch { /* the page still works with the API pairs */ }
   drillItems = buildItems(pairs, vocab);
   note.textContent += ` ${vocab.length} words from the verified vocabulary list. Total n = ${drillItems.length}.`;
@@ -231,7 +231,7 @@ let rack = [];
 async function initScrabble() {
   const status = $("#sc-status");
   try {
-    tiles = await (await fetch(TILES_URL)).json();
+    tiles = await (await fetch(withVersion(TILES_URL))).json();
     renderTiles();
     newRack();
   } catch (err) {
@@ -247,7 +247,7 @@ async function initScrabble() {
     pyodide.FS.mkdirTree("/oracle/kitaita_oracle");
     pyodide.FS.mkdirTree("/oracle/data");
     await Promise.all([...ORACLE_PY_FILES, ...ORACLE_DATA_FILES].map(async (f) => {
-      const text = await (await fetch(f)).text();
+      const text = await (await fetch(withVersion(f))).text();
       pyodide.FS.writeFile("/oracle/" + f, text);
     }));
     pyodide.runPython(`import sys; sys.path.insert(0, "/oracle")\nfrom kitaita_oracle import analyse, get_oracle\nget_oracle()`);
