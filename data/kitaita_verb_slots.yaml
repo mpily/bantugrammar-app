@@ -242,7 +242,15 @@ morphemes:
     source: verified infinitives, e.g. kumerea/kughesha (research VERIFIED_NOUN_TRANSLATIONS)
     swahili:
       infinitive: true
-  NEG2: []
+  NEG2:
+  - id: neg2.se
+    form: se
+    gloss: NEG.SUBJ
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 80 word types
+      with class subjects (jisebonyeke, ghisewonagha); speaker-verified only for persons/animates (research
+      NEGATIVE_*_PREFIX tables)'
   TAM:
   - id: tam.pres.we
     form: we
@@ -300,6 +308,16 @@ morphemes:
     tense: future
     unverified: false
     source: native-speaker correction 2026-10-07 (research page3_verb_rules.json notes)
+    swahili:
+      tense: future
+  - id: tam.fut.chaa
+    form: chaa
+    gloss: FUT (chaa)
+    tense: future
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; e.g. wichaabonya,
+      nichaambonya'
     swahili:
       tense: future
   - id: tam.cond.ki
@@ -561,6 +579,12 @@ morphemes:
     unverified: true
     source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
       in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 353 word types'
+  - id: fv.corpus.oghe
+    form: oghe
+    gloss: PAST.PFV (-oghe)
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 68 word types'
   - id: fv.corpus.enyi
     form: enyi
     gloss: IMP.PL?
@@ -1098,6 +1122,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.past
   tags:
   - affirmative
@@ -1127,6 +1152,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.perfect
   tags:
   - affirmative
@@ -1151,6 +1177,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.future
   tags:
   - affirmative
@@ -1168,6 +1195,7 @@ paradigms:
   - slot: TAM
     choose:
     - tam.fut.cha
+    - tam.fut.chaa
   - slot: OM
     choose: all
     optional: true
@@ -1179,6 +1207,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: aff.conditional
   tags:
   - affirmative
@@ -1205,6 +1234,59 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
+- id: aff.perfect.person
+  tags:
+  - affirmative
+  - perfect
+  unverified: true
+  note: 'corpus pattern: person markers na-/kwa- before -da- (nadakatisha, kwadamkira)'
+  sequence:
+  - slot: SM
+    choose:
+    - sm.1sg.present
+    - sm.2sg.present
+  - slot: TAM
+    choose:
+    - tam.perf.da
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.a
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
+- id: neg.subjunctive.class
+  tags:
+  - negative
+  - subjunctive_imperative
+  unverified: true
+  note: 'corpus pattern: class SM + -se- + root (jisebonyeke)'
+  sequence:
+  - slot: SM
+    choose:
+    - kind:
+      - class
+  - slot: NEG2
+    choose:
+    - neg2.se
+  - slot: OM
+    choose: all
+    optional: true
+  fv:
+  - fv.e.neg
+  - fv.corpus.agha
+  - fv.corpus.ie
+  - fv.corpus.ieghe
+  - fv.corpus.eghe
+  - fv.corpus.o
+  - fv.corpus.e
+  - fv.corpus.oghe
 - id: imperative
   tags:
   - affirmative
@@ -1221,6 +1303,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
   - fv.corpus.enyi
 - id: infinitive
   tags:
@@ -1241,6 +1324,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.present
   tags:
   - negative
@@ -1281,6 +1365,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.future
   tags:
   - negative
@@ -1310,6 +1395,7 @@ paradigms:
   - slot: TAM
     choose:
     - tam.fut.cha
+    - tam.fut.chaa
   - slot: OM
     choose: all
     optional: true
@@ -1321,6 +1407,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.past
   tags:
   - negative
@@ -1346,6 +1433,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.class.past.va
   tags:
   - negative
@@ -1369,6 +1457,7 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe
 - id: neg.person
   tags:
   - negative
@@ -1391,3 +1480,4 @@ paradigms:
   - fv.corpus.eghe
   - fv.corpus.o
   - fv.corpus.e
+  - fv.corpus.oghe

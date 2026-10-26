@@ -343,6 +343,8 @@ def build_verb_slots(v, classes):
          "source": SRC_TAM_2026_10_07},
         {"id": "tam.fut.cha", "form": "cha", "gloss": "FUT", "tense": "future", "unverified": False,
          "source": SRC_TAM_2026_10_07},
+        {"id": "tam.fut.chaa", "form": "chaa", "gloss": "FUT (chaa)", "tense": "future", "unverified": True,
+         "source": f"{SRC_CORPUS_AFFIX}; e.g. wichaabonya, nichaambonya"},
         {"id": "tam.cond.ki", "form": "ki", "gloss": "COND", "tense": "conditional", "unverified": False,
          "source": SRC_TAM_2026_10_07},
         {"id": "tam.cond.ka", "form": "ka", "gloss": "COND/CONS", "tense": "conditional", "unverified": False,
@@ -389,12 +391,15 @@ def build_verb_slots(v, classes):
     corpus_fv = []
     for form, gloss, n in (("agha", "HAB/IPFV", 255), ("ie", "PFV/SUBJ?", 192), ("ieghe", "PAST.PFV", 113),
                            ("eghe", "PAST.PFV", 50), ("o", "FV -o (function unknown)", 79),
-                           ("e", "FV -e (subjunctive/past?)", 353)):
+                           ("e", "FV -e (subjunctive/past?)", 353), ("oghe", "PAST.PFV (-oghe)", 68)):
         corpus_fv.append({"id": f"fv.corpus.{form}", "form": form, "gloss": gloss, "unverified": True,
                           "source": f"{SRC_CORPUS_AFFIX}; {n} word types"})
     fv += corpus_fv
     fv.append({"id": "fv.corpus.enyi", "form": "enyi", "gloss": "IMP.PL?", "unverified": True,
                "source": f"{SRC_CORPUS_AFFIX}; 12 word types (sikirenyi)"})
+    neg2 = [{"id": "neg2.se", "form": "se", "gloss": "NEG.SUBJ", "unverified": True,
+             "source": f"{SRC_CORPUS_AFFIX}; 80 word types with class subjects (jisebonyeke, ghisewonagha); "
+                       "speaker-verified only for persons/animates (research NEGATIVE_*_PREFIX tables)"}]
     neg = [{"id": "neg.nde", "form": v.NEGATIVE_MARKER_KITAITA, "gloss": "NEG", "unverified": False, "source": SRC_NEG}]
 
     portmanteau = []
@@ -443,7 +448,7 @@ def build_verb_slots(v, classes):
          "fv": ["fv.a"]},
         {"id": "aff.future", "tags": ["affirmative", "future"], "unverified": False,
          "sequence": [{"slot": "SM", "choose": [{"kind": ["class"]}, *["sm.1sg.future", "sm.2sg.future", "sm.1pl.future", "sm.2pl.future"]]},
-                      {"slot": "TAM", "choose": ["tam.fut.cha"]},
+                      {"slot": "TAM", "choose": ["tam.fut.cha", "tam.fut.chaa"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.a"]},
         {"id": "aff.conditional", "tags": ["affirmative", "conditional"], "unverified": False,
@@ -451,6 +456,18 @@ def build_verb_slots(v, classes):
                       {"slot": "TAM", "choose": ["tam.cond.ki", "tam.cond.ka"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.a"]},
+        {"id": "aff.perfect.person", "tags": ["affirmative", "perfect"], "unverified": True,
+         "note": "corpus pattern: person markers na-/kwa- before -da- (nadakatisha, kwadamkira)",
+         "sequence": [{"slot": "SM", "choose": ["sm.1sg.present", "sm.2sg.present"]},
+                      {"slot": "TAM", "choose": ["tam.perf.da"]},
+                      {"slot": "OM", "choose": "all", "optional": True}],
+         "fv": ["fv.a"]},
+        {"id": "neg.subjunctive.class", "tags": ["negative", "subjunctive_imperative"], "unverified": True,
+         "note": "corpus pattern: class SM + -se- + root (jisebonyeke)",
+         "sequence": [{"slot": "SM", "choose": [{"kind": ["class"]}]},
+                      {"slot": "NEG2", "choose": ["neg2.se"]},
+                      {"slot": "OM", "choose": "all", "optional": True}],
+         "fv": ["fv.e.neg"]},
         {"id": "imperative", "tags": ["affirmative", "imperative"], "unverified": True,
          "note": "bare root + -a (imperative / citation form), e.g. 'legha'. Reported by the project owner "
                  "2026-10-26; not yet in the research tables. Note: bare 'legha' itself does not occur in the "
@@ -472,7 +489,7 @@ def build_verb_slots(v, classes):
          "note": "nde + SM + cha + root + -a (future keeps -a)",
          "sequence": [{"slot": "NEG", "choose": ["neg.nde"]},
                       {"slot": "SM", "choose": [{"class": [c for c in class_ids if c != "va"], "kind": ["class"]}, *["sm.va.neg"]]},
-                      {"slot": "TAM", "choose": ["tam.fut.cha"]},
+                      {"slot": "TAM", "choose": ["tam.fut.cha", "tam.fut.chaa"]},
                       {"slot": "OM", "choose": "all", "optional": True}],
          "fv": ["fv.a"]},
         {"id": "neg.class.past", "tags": ["negative", "past"], "unverified": False,
@@ -507,7 +524,7 @@ def build_verb_slots(v, classes):
             "Object markers are corpus-inferred hypotheses (1sg ni, 1pl di, cl2/2pl wi); class OMs "
             "have no data yet.",
         ],
-        "morphemes": {"NEG": neg, "SM": sm, "NEG2": [], "TAM": tam, "REL": [], "OM": om, "EXT": ext, "FV": fv,
+        "morphemes": {"NEG": neg, "SM": sm, "NEG2": neg2, "TAM": tam, "REL": [], "OM": om, "EXT": ext, "FV": fv,
                       "PORTMANTEAU": portmanteau},
         "paradigms": paradigms,
     }
@@ -525,6 +542,10 @@ def build_phonology(v):
              "when": {"tags": ["affirmative", "present"], "kind": ["class"]},
              "table": dict(v.PRESENT_SM_VOWEL_CONFIRMED), "optional": True, "unverified": False,
              "source": "research PRESENT_SM_VOWEL_CONFIRMED (u->wa, ri->ra, ...); unfused forms also verified"},
+            {"id": "perfect_sm_fusion", "order": 1, "type": "replace_form", "target": "SM",
+             "when": {"tags": ["affirmative", "perfect"], "kind": ["class"]},
+             "table": dict(v.PRESENT_SM_VOWEL_CONFIRMED), "optional": True, "unverified": True,
+             "source": "corpus pattern: the present-tense fused markers also occur before -da- (wadawona, ghwada-)"},
             {"id": "past_sm_vowel_lowering", "order": 2, "type": "replace_final", "target": "SM",
              "when": {"tags": ["affirmative", "past"], "kind": ["class", "person"]},
              "table": {"i": "e", "u": "o"}, "optional": True, "unverified": True,

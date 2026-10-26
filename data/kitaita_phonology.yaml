@@ -31,6 +31,30 @@ rules:
   optional: true
   unverified: false
   source: research PRESENT_SM_VOWEL_CONFIRMED (u->wa, ri->ra, ...); unfused forms also verified
+- id: perfect_sm_fusion
+  order: 1
+  type: replace_form
+  target: SM
+  when:
+    tags:
+    - affirmative
+    - perfect
+    kind:
+    - class
+  table:
+    u: wa
+    gh: gha
+    ghu: gha
+    ji: ja
+    ri: ra
+    i: ya
+    chi: cha
+    wi: wa
+    ghi: gha
+    ku: kwa
+  optional: true
+  unverified: true
+  source: 'corpus pattern: the present-tense fused markers also occur before -da- (wadawona, ghwada-)'
 - id: past_sm_vowel_lowering
   order: 2
   type: replace_final
