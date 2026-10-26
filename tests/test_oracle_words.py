@@ -48,7 +48,7 @@ def test_nouns_and_adjectives(word, word_type):
 
 @pytest.mark.parametrize("word,reason,what", [
     ("wewamanya", "illegal_affix_sequence", "TAM before SM"),
-    ("uwechiwona", "illegal_affix_sequence", "OM 'chi' is not in the object-marker inventory"),
+    ("uwelawona", "illegal_affix_sequence", "OM 'la' is not in the object-marker inventory"),
     ("ndezamie", "illegal_affix_sequence", "negative 'nde' is not an adjectival prefix"),
     ("kizamie", "illegal_affix_sequence", "series-A prefix ki- on series-B stem -zamie"),
     ("wawekpakpa", "unknown_root", "licensed prefix wa-we- + unknown root"),

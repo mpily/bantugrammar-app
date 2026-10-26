@@ -353,6 +353,78 @@ morphemes:
       n=10
     swahili:
       class: '2'
+  - id: om.corpus.m
+    form: m
+    gloss: OM.3sg/cl.u
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 277 word types,
+      e.g. ukamneka'
+    swahili:
+      class: '1'
+  - id: om.corpus.i
+    form: i
+    gloss: OM.cl.i
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 149 word types,
+      e.g. kwaipata'
+    swahili:
+      class: '9'
+  - id: om.corpus.ku
+    form: ku
+    gloss: OM.2sg
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 109 word types,
+      e.g. nichakubonya'
+    swahili:
+      person: 2sg
+  - id: om.corpus.ri
+    form: ri
+    gloss: OM.cl.ri
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 71 word types,
+      e.g. ukarineka'
+    swahili:
+      class: '1'
+  - id: om.corpus.ghi
+    form: ghi
+    gloss: OM.cl.ghi
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 68 word types,
+      e.g. kughighore'
+    swahili:
+      class: '6'
+  - id: om.corpus.ji
+    form: ji
+    gloss: OM.cl.ji
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 62 word types,
+      e.g. kujibonya'
+    swahili:
+      class: '5'
+  - id: om.corpus.chi
+    form: chi
+    gloss: OM.cl.chi
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 45 word types,
+      e.g. ukachiinja'
+    swahili:
+      class: '7'
+  - id: om.corpus.ghu
+    form: ghu
+    gloss: OM.cl.ghu
+    unverified: true
+    source: 'corpus pattern: seen after speaker-verified roots in the Kitaita Bible corpus (scripts/affix_evidence
+      in status.md 2026-10-26); function guessed from Bantu typology, NOT speaker-checked; 34 word types,
+      e.g. wikaghuboisa'
+    swahili:
+      class: '3'
   EXT:
   - id: ext.w
     form: w

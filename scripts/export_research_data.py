@@ -359,6 +359,17 @@ def build_verb_slots(v, classes):
                    "source": f"{SRC_OM}; n={h['n']}",
                    "swahili": {"person": key} if key in ("1sg", "1pl") else {"class": "2"}})
 
+    # corpus-attested object markers between a licensed prefix and a verified root (2026-10-26)
+    for form, key, sw, n, example in (("m", "3sg/cl.u", {"class": "1"}, 277, "ukamneka"),
+                                      ("i", "cl.i", {"class": "9"}, 149, "kwaipata"),
+                                      ("ku", "2sg", {"person": "2sg"}, 109, "nichakubonya"),
+                                      ("ri", "cl.ri", {"class": "1"}, 71, "ukarineka"),
+                                      ("ghi", "cl.ghi", {"class": "6"}, 68, "kughighore"),
+                                      ("ji", "cl.ji", {"class": "5"}, 62, "kujibonya"),
+                                      ("chi", "cl.chi", {"class": "7"}, 45, "ukachiinja"),
+                                      ("ghu", "cl.ghu", {"class": "3"}, 34, "wikaghuboisa")):
+        om.append({"id": f"om.corpus.{form}", "form": form, "gloss": f"OM.{key}", "unverified": True,
+                   "source": f"{SRC_CORPUS_AFFIX}; {n} word types, e.g. {example}", "swahili": sw})
     fv = [
         {"id": "fv.a", "form": "a", "gloss": "FV", "unverified": False, "source": "verified sentences"},
         {"id": "fv.e.neg", "form": v.NEGATIVE_FINAL_VOWEL, "gloss": "FV.NEG", "unverified": False, "source": SRC_NEG},
