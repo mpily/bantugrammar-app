@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Review Player Words</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Review player words</h1>
+  <p class="tagline">Words players accepted (or voted down) in the Word Race. Approve real Kitaita words with their meaning and, for nouns, their class; decline the rest. <a href="index.html">Learning Lab</a> · <a href="game.html">Word Race</a></p>
+</header>
+<div id="waking" class="waking" hidden role="status"></div>
+<main>
+  <form id="rv-key-form" class="row">
+    <input id="rv-key" type="password" autocomplete="current-password" placeholder="Reviewer key" required>
+    <button type="submit">Load words</button>
+    <button type="button" id="rv-forget" class="secondary" hidden>Forget key on this device</button>
+  </form>
+  <p class="muted small">The key is the Space secret <code>TRUSTED_REVIEWER_KEYS</code>. It is remembered in this browser only; use “Forget key” on shared devices.</p>
+  <p id="rv-status" class="muted" aria-live="polite"></p>
+
+  <div id="rv-main" hidden>
+    <div class="row">
+      <label class="small">Show
+        <select id="rv-filter">
+          <option value="todo">needs review</option>
+          <option value="all">all words</option>
+          <option value="approved">approved</option>
+          <option value="declined">declined</option>
+        </select>
+      </label>
+      <button type="button" id="rv-reload" class="secondary">Refresh</button>
+      <span id="rv-count" class="muted small"></span>
+    </div>
+    <div id="rv-list"></div>
+  </div>
+</main>
+<script type="module" src="js/review.js"></script>
+</body>
+</html>
