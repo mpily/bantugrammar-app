@@ -70,10 +70,13 @@ class Oracle:
             pw = self.player_words.get(w)
             if pw is not None:
                 verified = pw.get("status") == "verified"
+                # meaning / type / class come only from a trusted reviewer's approval (Space feed)
                 parses.append({"word_type": "player_accepted",
-                               "slots": [{"slot": "WORD", "form": w, "gloss": "accepted by players' vote"}],
+                               "slots": [{"slot": "WORD", "form": w,
+                                          "gloss": pw.get("translation") or "accepted by players' vote"}],
                                "status": pw.get("status"), "n_rooms": pw.get("n_rooms"),
-                               "swahili_equivalent": None, "uses_unverified_rules": not verified,
+                               "declared_type": pw.get("word_type"), "class": pw.get("noun_class"),
+                               "swahili_equivalent": pw.get("translation"), "uses_unverified_rules": not verified,
                                "unverified_items": [] if verified else ["accepted by player vote (not speaker-verified)"]})
             for p in self.verbs["dav"].parse(w):
                 p["swahili_equivalents"] = self._swahili_equivalents(p)

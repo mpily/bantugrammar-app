@@ -152,3 +152,7 @@ def test_player_accepted_words():
     p = o.analyse("zzyzx")["parses"][0]
     assert p["word_type"] == "player_accepted" and p["uses_unverified_rules"]
     assert o.analyse("qqq")["parses"][0]["uses_unverified_rules"] is False
+    o.set_player_words([{"word": "kifumbii", "status": "verified", "translation": "kiti", "word_type": "noun",
+                         "noun_class": "chi"}])
+    p = o.analyse("kifumbii")["parses"][-1]
+    assert (p["swahili_equivalent"], p["declared_type"], p["class"]) == ("kiti", "noun", "chi")
