@@ -100,3 +100,10 @@ input.bad-input { border-color: var(--bad); }
 .players li { padding: 2px 0; }
 .players .pts { font-weight: 700; margin-left: 6px; }
 .reveal-player { margin: 6px 0; line-height: 2; }
+
+/* ---- reviewer page (review.html) ---- */
+.review-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.review-word { font-size: 1.3rem; font-weight: 700; font-family: ui-monospace, monospace; }
+.review-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+.review-fields label { font-weight: 600; font-size: .9rem; margin: 0; }
+.rv-msg { color: var(--muted); }

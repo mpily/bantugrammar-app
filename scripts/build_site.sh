@@ -11,6 +11,7 @@ mkdir -p _site/kitaita_oracle
 cp -r site/. _site/
 cp -r data _site/data
 cp kitaita_oracle/*.py _site/kitaita_oracle/
+python3 scripts/build_class_list.py > _site/data/kitaita_classes.json
 touch _site/.nojekyll
 
 # Cache-busting: GitHub Pages lets browsers cache files ~10 min, so after a deploy a

@@ -161,3 +161,25 @@ rack rejected → tap-to-type → rejected word challenged → other player vote
 `hf_space/` updated, then this branch merged for Pages); the game e2e is not in
 CI (it needs a running Space); a dropped connection rejoins as a new player
 (score restarts).
+
+## 2026-10-28: reviewer page for player-voted words
+
+User: words were accepted in games, but there was nowhere to accept or decline
+them (only a raw API endpoint). Added `site/review.html` (not linked from the
+public pages; `noindex`): enter the reviewer key (the Space secret
+`TRUSTED_REVIEWER_KEYS`, remembered in that browser only, with a "forget"
+button), see every voted word — including words rooms voted down — with room
+and vote counts, and approve or decline it with a translation/meaning, word
+type and, for nouns, the noun class (picker built from
+`data/kitaita_concord.yaml` by `scripts/build_class_list.py`, showing the
+nearest Swahili class and example nouns). Approved words carry the meaning and
+class into the Scrabble tab's oracle; declined words disappear from the game
+checker. Needs the matching Space change (BantuGrammar
+`claude/kind-ride-8th05r`).
+
+Checks: pytest 67 passed; node 43 passed (new: review form logic, class
+labels, reviewer-key header); page e2e OK; new `tests/e2e/review.e2e.mjs`
+against the real Space API run locally with a test key and two seeded votes:
+wrong key rejected → queue lists accepted + voted-down words → approve
+"kifumbii" as noun class chi meaning "kiti" → decline "zawa" → public feed
+shows only kifumbii as verified with that meaning and class.
