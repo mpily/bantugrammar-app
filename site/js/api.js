@@ -29,13 +29,13 @@ export class ApiError extends Error {
 }
 
 export function makeClient({ base = API_BASE, fetchImpl = globalThis.fetch, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), onWaking = () => {}, delays = RETRY_DELAYS_MS } = {}) {
-  async function request(path, { method = "GET", body } = {}) {
+  async function request(path, { method = "GET", body, headers = {} } = {}) {
     for (let attempt = 0; ; attempt++) {
       let res;
       try {
         res = await fetchImpl(base + path, {
           method,
-          headers: body ? { "Content-Type": "application/json" } : undefined,
+          headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...headers },
           body: body ? JSON.stringify(body) : undefined,
         });
       } catch (err) {
@@ -61,6 +61,8 @@ export function makeClient({ base = API_BASE, fetchImpl = globalThis.fetch, slee
     request,
     health: () => request("/api/health"),
     playerWords: () => request("/api/player_words"),
+    reviewQueue: (key) => request("/api/player_words/review_queue", { headers: { "X-Reviewer-Key": key } }),
+    review: (key, body) => request("/api/player_words/review", { method: "POST", body, headers: { "X-Reviewer-Key": key } }),
     translate: (text) => request("/api/translate", { method: "POST", body: { text, src: "swh", tgt: "dav" } }),
     feedback: (payload) => request("/api/feedback", { method: "POST", body: payload }),
     progress: () => request("/api/progress"),
